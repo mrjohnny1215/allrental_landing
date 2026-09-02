@@ -1,8 +1,8 @@
-export default function Trust() {
+export default function Trust({ apartment }) {
   return (
     <section className="bg-white">
       <div className="mx-auto max-w-6xl px-5 py-16">
-        <h2 className="text-center text-xl font-bold text-deep-navy md:text-2xl">신뢰할 수 있는 상담</h2>
+        <h2 className="text-center text-xl font-bold text-deep-navy md:text-2xl">{apartment.name} 신뢰할 수 있는 상담</h2>
         <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
           {[
             '조건에 맞는 제품만 비교해드립니다.',

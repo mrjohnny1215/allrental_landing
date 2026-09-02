@@ -71,7 +71,7 @@ export default function LandingLayout({ slug }) {
         <Recommendation products={products} />
         <CompareIntro />
         <MultiProductConsultation />
-        <Trust />
+        <Trust apartment={apartment} />
         <ConsultationForm
           apartment={apartment}
           utm={{ utmSource, utmMedium, utmCampaign, utmContent }}

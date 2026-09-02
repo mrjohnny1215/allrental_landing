@@ -4,7 +4,7 @@ export default function Header({ apartment }) {
       <div className="mx-auto max-w-6xl px-5 h-16 flex items-center justify-between">
         <div>
           <div className="text-base font-bold tracking-wide">ALL렌탈</div>
-          <div className="text-xs text-gray-300">입주민 맞춤 렌탈 상담 서비스</div>
+          <div className="text-xs text-gray-300">{apartment.name} · 입주민 맞춤 렌탈 상담</div>
         </div>
         <nav className="hidden md:flex items-center gap-6 text-sm text-gray-200">
           <span className="flex items-center gap-2">
