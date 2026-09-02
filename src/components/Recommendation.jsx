@@ -45,6 +45,14 @@ const MOVE_IN_OPTIONS = [
   { value: 'undecided', label: '미정' },
 ]
 
+const IMAGE_MAP = {
+  정수기: '/images/products/water.jpg',
+  비데: '/images/products/bidet.jpg',
+  공기청정기: '/images/products/purifier.jpg',
+  매트리스: '/images/products/mattress.jpg',
+  안마의자: '/images/products/massager.jpg',
+}
+
 export default function Recommendation({ products = [], preselected }) {
   const [form, setForm] = useState({
     family: '',
@@ -58,9 +66,7 @@ export default function Recommendation({ products = [], preselected }) {
   const toggleArray = (key, value) => {
     setForm((prev) => ({
       ...prev,
-      [key]: prev[key].includes(value)
-        ? prev[key].filter((v) => v !== value)
-        : [...prev[key], value],
+      [key]: prev[key].includes(value) ? prev[key].filter((v) => v !== value) : [...prev[key], value],
     }))
   }
 
@@ -68,13 +74,11 @@ export default function Recommendation({ products = [], preselected }) {
 
   const recommended = useMemo(() => {
     if (!products.length || !isValid) return []
-    const categoryValue = form.products[0]
-    const categoryLabel = CATEGORY_MAP[categoryValue] || categoryValue
+    const categoryLabel = CATEGORY_MAP[form.products[0]] || form.products[0]
     return products
+      .filter((p) => (p.category || '').includes(categoryLabel))
       .filter((p) => {
-        const matchesCategory = (p.category || '').includes(categoryLabel)
         const fee = Number(p.min_monthly_fee || p.pricing_matrix?.[0]?.monthly_fee || 0)
-        if (!matchesCategory) return false
         if (form.budget === 'light' && fee > 30000) return false
         if (form.budget === 'standard' && (fee < 30000 || fee > 50000)) return false
         if (form.budget === 'premium' && fee < 50000) return false
@@ -94,11 +98,7 @@ export default function Recommendation({ products = [], preselected }) {
       <div className="mx-auto max-w-6xl px-5 py-16">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-12">
           <div>
-            <img
-              src="/images/gangbyeon-interior.jpg"
-              alt="고급 주거공간"
-              className="h-64 w-full rounded-2xl object-cover md:h-full"
-            />
+            <div className="h-64 w-full rounded-2xl bg-surface md:h-full" />
           </div>
           <div>
             <h2 className="text-xl font-bold text-deep-navy md:text-2xl">우리 집 맞춤 렌탈 추천</h2>
@@ -222,6 +222,7 @@ function ProductCard({ rank, product }) {
   const monthly = product.pricing_matrix?.[0]?.monthly_fee || product.min_monthly_fee || '문의'
   const points = product.selling_points?.points?.slice(0, 4) || []
   const label = typeof monthly === 'number' ? `월 ${monthly.toLocaleString()}원` : monthly
+  const thumb = product.thumbnail || IMAGE_MAP[product.category] || '/images/products/fallback.jpg'
   return (
     <div className="relative rounded-2xl border border-gray-100 bg-white p-4 shadow-sm">
       <div
@@ -231,11 +232,11 @@ function ProductCard({ rank, product }) {
       >
         {rank}
       </div>
-      <div className="mt-2 flex h-32 items-center justify-center rounded-xl bg-surface">
-        <span className="text-sm font-semibold text-deep-navy">{product.name}</span>
+      <div className="mt-2 flex h-32 items-center justify-center overflow-hidden rounded-xl bg-surface">
+        <img src={thumb} alt={product.name} className="h-full w-full object-contain" />
       </div>
       <div className="mt-3 text-sm font-semibold text-deep-navy">{product.brand}</div>
-      <div className="text-xs text-muted">{product.category}</div>
+      <div className="text-xs text-muted">{product.name}</div>
       <div className="mt-2 text-base font-bold text-deep-navy">{label}</div>
       <ul className="mt-2 space-y-1 text-xs text-muted">
         {points.map((pt, i) => (
