@@ -1,14 +1,25 @@
 export default function Header({ apartment }) {
   return (
-    <header className="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-gray-100">
-      <div className="mx-auto max-w-lg px-5 h-14 flex items-center justify-between">
-        <div className="text-base font-semibold text-deep-navy">ALL렌탈</div>
-        <a
-          href="#consult"
-          className="rounded-full bg-gold px-4 py-2 text-sm font-semibold text-white"
-        >
-          상담 신청
-        </a>
+    <header className="fixed top-0 z-50 w-full bg-deep-navy text-white">
+      <div className="mx-auto max-w-6xl px-5 h-16 flex items-center justify-between">
+        <div>
+          <div className="text-base font-bold tracking-wide">ALL렌탈</div>
+          <div className="text-xs text-gray-300">입주민 맞춤 렌탈 상담 서비스</div>
+        </div>
+        <nav className="hidden md:flex items-center gap-6 text-sm text-gray-200">
+          <span className="flex items-center gap-2">
+            <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-white/10 text-xs">✔</span>
+            여러 브랜드 한 번에 비교
+          </span>
+          <span className="flex items-center gap-2">
+            <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-white/10 text-xs">✔</span>
+            상담 후 결정
+          </span>
+          <span className="flex items-center gap-2">
+            <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-white/10 text-xs">✔</span>
+            간편 상담 신청
+          </span>
+        </nav>
       </div>
     </header>
   )

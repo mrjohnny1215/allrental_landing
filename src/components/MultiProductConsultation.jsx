@@ -1,27 +1,49 @@
-const PACKAGES = [
-  { id: 'water', title: '정수기', desc: '필터·유량·관리를 비교해드립니다.' },
-  { id: 'bidet', title: '비데', desc: '살균·절수·편의 기능을 비교합니다.' },
-  { id: 'purifier', title: '공기청정기', desc: '면적·필터·소음을 비교합니다.' },
-  { id: 'mattress', title: '매트리스', desc: '소재·지지력·케어를 비교합니다.' },
-  { id: 'massager', title: '안마의자', desc: '코스·소음·관리를 비교합니다.' },
+const BUNDLES = [
+  {
+    id: 'water-bidet',
+    title: '정수기 + 비데',
+    desc: '필수 가전을 한 번에 편리하게',
+  },
+  {
+    id: 'water-purifier',
+    title: '정수기 + 공기청정기',
+    desc: '깨끗한 물과 공기를 동시에',
+  },
+  {
+    id: 'water-bidet-mattress',
+    title: '정수기 + 비데 + 매트리스',
+    desc: '생활 필수품을 스마트하게',
+  },
 ]
 
 export default function MultiProductConsultation() {
   return (
-    <section className="bg-white">
-      <div className="mx-auto max-w-lg px-5 py-8">
-        <h2 className="text-center text-lg font-semibold text-deep-navy">복수 제품 상담</h2>
-        <p className="mt-1 text-center text-sm text-muted">여러 제품을 한 번에 상담 받으실 수 있습니다.</p>
-        <div className="mt-5 grid grid-cols-1 gap-2 sm:grid-cols-2">
-          {PACKAGES.map((pkg) => (
-            <a
-              key={pkg.id}
-              href="#consult"
-              className="rounded-2xl border border-gray-100 bg-surface p-4"
+    <section className="bg-surface">
+      <div className="mx-auto max-w-6xl px-5 py-16">
+        <h2 className="text-center text-xl font-bold text-deep-navy md:text-2xl">
+          입주민이라면 여러 제품을 한 번에 상담하세요
+        </h2>
+        <p className="mt-2 text-center text-sm text-muted">
+          여러 제품을 한 번에 비교하고 혜택까지 받아보세요.
+        </p>
+        <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
+          {BUNDLES.map((bundle) => (
+            <div
+              key={bundle.id}
+              className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm"
             >
-              <div className="text-sm font-semibold text-deep-navy">{pkg.title}</div>
-              <div className="mt-1 text-xs text-muted">{pkg.desc}</div>
-            </a>
+              <div className="flex h-32 items-center justify-center rounded-xl bg-surface">
+                <span className="text-sm font-semibold text-deep-navy">{bundle.title}</span>
+              </div>
+              <div className="mt-4 text-base font-semibold text-deep-navy">{bundle.title}</div>
+              <div className="text-sm text-muted">{bundle.desc}</div>
+              <a
+                href="#consult"
+                className="mt-4 inline-flex w-full items-center justify-center rounded-xl border border-deep-navy px-4 py-3 text-sm font-semibold text-deep-navy"
+              >
+                한 번에 비교상담
+              </a>
+            </div>
           ))}
         </div>
       </div>

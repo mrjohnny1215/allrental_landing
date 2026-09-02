@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useSearchParams, useParams, Link } from 'react-router-dom'
 import { getApartmentBySlug } from '../config'
 import Header from '../components/Header'
@@ -17,6 +17,7 @@ export default function LandingLayout({ slug }) {
   const resolvedSlug = params?.slug || slug
   const apartment = useMemo(() => getApartmentBySlug(resolvedSlug), [resolvedSlug])
   const [searchParams] = useSearchParams()
+  const [products, setProducts] = useState([])
 
   const utmSource = searchParams.get('utm_source') || ''
   const utmMedium = searchParams.get('utm_medium') || ''
@@ -34,6 +35,17 @@ export default function LandingLayout({ slug }) {
 
     const ogDesc = document.querySelector('meta[property="og:description"]')
     if (ogDesc) ogDesc.setAttribute('content', apartment.seoDescription)
+
+    fetch('/data/products.json')
+      .then((r) => r.json())
+      .then((data) => {
+        const list = Array.isArray(data) ? data : []
+        setProducts(list)
+        try {
+          localStorage.setItem('allrental_products', JSON.stringify(list))
+        } catch {}
+      })
+      .catch(() => {})
   }, [apartment])
 
   if (!apartment) {
@@ -56,7 +68,7 @@ export default function LandingLayout({ slug }) {
         <Hero apartment={apartment} />
         <Categories />
         <HowItWorks />
-        <Recommendation />
+        <Recommendation products={products} />
         <CompareIntro />
         <MultiProductConsultation />
         <Trust />
