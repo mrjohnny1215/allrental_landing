@@ -28,7 +28,24 @@ app.get('/api/leads', (_req, res) => {
 
 app.use(express.static(join(__dirname, 'dist')))
 
-app.get('*', (_req, res) => {
+app.get('/', (_req, res) => {
+  res.sendFile(join(__dirname, 'dist', 'index.html'))
+})
+
+app.get('/mediale', (_req, res) => {
+  res.sendFile(join(__dirname, 'dist', 'index.html'))
+})
+app.get('/deungchon', (_req, res) => {
+  res.sendFile(join(__dirname, 'dist', 'index.html'))
+})
+app.get('/reventus', (_req, res) => {
+  res.sendFile(join(__dirname, 'dist', 'index.html'))
+})
+app.get('/gangbyeon', (_req, res) => {
+  res.sendFile(join(__dirname, 'dist', 'index.html'))
+})
+
+app.use((_req, res) => {
   res.sendFile(join(__dirname, 'dist', 'index.html'))
 })
 
