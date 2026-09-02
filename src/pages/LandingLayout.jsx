@@ -1,6 +1,16 @@
 import { useEffect, useMemo } from 'react'
 import { useSearchParams, useParams, Link } from 'react-router-dom'
 import { getApartmentBySlug } from '../config'
+import Header from '../components/Header'
+import Hero from '../components/Hero'
+import Categories from '../components/Categories'
+import HowItWorks from '../components/HowItWorks'
+import Recommendation from '../components/Recommendation'
+import CompareIntro from '../components/CompareIntro'
+import MultiProductConsultation from '../components/MultiProductConsultation'
+import Trust from '../components/Trust'
+import ConsultationForm from '../components/ConsultationForm'
+import Footer from '../components/Footer'
 
 export default function LandingLayout({ slug }) {
   const params = useParams()
