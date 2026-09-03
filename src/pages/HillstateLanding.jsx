@@ -1,14 +1,9 @@
 import { useState, useEffect } from 'react'
 
-const PRODUCTS = [
-  { id: 'water', name: '정수기', image: '/assets/hillstate/water-purifier.jpg', desc: '깨끗한 물, 편리한 관리' },
-  { id: 'bidet', name: '비데', image: '/assets/hillstate/bidet.jpg', desc: '위생적인 관리와 편리한 생활' },
-  { id: 'purifier', name: '공기청정기', image: '/assets/hillstate/air-purifier.jpg', desc: '미세먼지·유해물질 제거' },
-  { id: 'mattress', name: '매트리스', image: '/assets/hillstate/mattress.jpg', desc: '숙면을 위한 최적의 선택' },
-  { id: 'massager', name: '안마의자', image: '/assets/hillstate/massage-chair.jpg', desc: '하루의 피로를 풀어주는 힐링 케어' },
-]
+const PRODUCTS_API = '/api/leads?table=products'
 
 export default function HillstateLanding() {
+  const [products, setProducts] = useState([])
   const [selectedProduct, setSelectedProduct] = useState('')
   const [form, setForm] = useState({
     name: '',
@@ -19,6 +14,15 @@ export default function HillstateLanding() {
     privacyConsent: false,
   })
   const [status, setStatus] = useState('idle')
+
+  useEffect(() => {
+    fetch(PRODUCTS_API)
+      .then((r) => r.json())
+      .then((data) => {
+        if (Array.isArray(data)) setProducts(data)
+      })
+      .catch(() => setProducts([]))
+  }, [])
 
   const scrollToForm = (productId) => {
     setSelectedProduct(productId)
@@ -69,14 +73,22 @@ export default function HillstateLanding() {
     }
   }
 
+  const getImageSrc = (p) => {
+    if (p.thumbnail) return p.thumbnail
+    if (p.category && p.category.includes('정수기')) return '/assets/hillstate/water-purifier.jpg'
+    if (p.category && p.category.includes('비데')) return '/assets/hillstate/bidet.jpg'
+    if (p.category && p.category.includes('공기청정')) return '/assets/hillstate/air-purifier.jpg'
+    if (p.category && p.category.includes('매트리스')) return '/assets/hillstate/mattress.jpg'
+    if (p.category && p.category.includes('안마')) return '/assets/hillstate/massage-chair.jpg'
+    return '/assets/hillstate/fallback.jpg'
+  }
+
   return (
     <div className="min-h-screen bg-[#FAF8F5]">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-gray-100">
         <div className="mx-auto max-w-7xl px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="text-xl font-extrabold tracking-tight text-[#8F1D18]">HILLSTATE</div>
-          </div>
+          <div className="text-xl font-extrabold tracking-tight text-[#8F1D18]">HILLSTATE</div>
           <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-700">
             <a href="#products" className="hover:text-[#8F1D18]">렌탈 제품</a>
             <a href="#benefits" className="hover:text-[#8F1D18]">렌탈 혜택</a>
@@ -145,18 +157,28 @@ export default function HillstateLanding() {
             <p className="mt-2 text-sm text-gray-600">여러 브랜드, 여러 조건을 한 번에 비교하고 우리 집에 맞는 제품을 선택하세요.</p>
           </div>
           <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-5">
-            {PRODUCTS.map((p) => (
+            {products.length > 0 ? products.map((p) => (
               <div key={p.id} className="flex flex-col rounded-2xl border border-gray-100 bg-[#FAF8F5] p-4 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
                 <div className="flex h-32 items-center justify-center overflow-hidden rounded-xl bg-white">
-                  <img src={p.image} alt={p.name} className="h-full w-full object-contain" />
+                  <img src={getImageSrc(p)} alt={p.name} className="h-full w-full object-contain" />
                 </div>
                 <div className="mt-3 text-base font-bold text-[#171717]">{p.name}</div>
-                <div className="mt-1 text-xs text-gray-600">{p.desc}</div>
-                <button onClick={() => scrollToForm(p.id)} className="mt-3 inline-flex w-full items-center justify-center rounded-xl bg-[#8F1D18] px-4 py-3 text-sm font-semibold text-white">
-                  {p.name} 상담받기 →
+                <div className="mt-1 text-xs text-gray-600">{p.brand}</div>
+                <button onClick={() => scrollToForm(p.category || p.name)} className="mt-3 inline-flex w-full items-center justify-center rounded-xl bg-[#8F1D18] px-4 py-3 text-sm font-semibold text-white">
+                  상담받기 →
                 </button>
               </div>
-            ))}
+            )) : (
+              ['정수기', '비데', '공기청정기', '매트리스', '안마의자'].map((name) => (
+                <div key={name} className="flex flex-col rounded-2xl border border-gray-100 bg-[#FAF8F5] p-4 shadow-sm">
+                  <div className="flex h-32 items-center justify-center overflow-hidden rounded-xl bg-white">
+                    <span className="text-xs text-gray-400">로딩중...</span>
+                  </div>
+                  <div className="mt-3 text-base font-bold text-[#171717]">{name}</div>
+                  <div className="mt-3 inline-flex w-full items-center justify-center rounded-xl bg-[#8F1D18] px-4 py-3 text-sm font-semibold text-white">상담받기 →</div>
+                </div>
+              ))
+            )}
           </div>
         </div>
       </section>
@@ -228,8 +250,7 @@ export default function HillstateLanding() {
                   <label className="text-sm font-semibold text-[#171717]">관심 제품</label>
                   <select value={selectedProduct} onChange={(e) => { setSelectedProduct(e.target.value); setForm((prev) => ({ ...prev, products: e.target.value ? [e.target.value] : [] })) }} className="mt-1 w-full rounded-xl border border-gray-200 px-3 py-3 text-sm">
                     <option value="">선택해주세요</option>
-                    {PRODUCTS.map((p) => <option key={p.id} value={p.id}>{p.name}</option>)}
-                    <option value="multiple">여러 제품 함께 상담</option>
+                    {['정수기','비데','공기청정기','매트리스','안마의자','여러 제품 함께 상담'].map((name) => <option key={name} value={name}>{name}</option>)}
                   </select>
                 </div>
                 <div className="sm:col-span-2">
