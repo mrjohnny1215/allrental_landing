@@ -11,7 +11,8 @@ export default async function handler(req, res) {
   }
 
   try {
-    const productsRes = await fetch(`${req.headers.host || 'allrental-landing.vercel.app'}/data/products.json`)
+    const host = req.headers.host || 'allrental-landing.vercel.app'
+    const productsRes = await fetch(`https://${host}/data/products.json`)
     if (!productsRes.ok) throw new Error('products.json fetch failed')
     const productsData = await productsRes.json()
 
