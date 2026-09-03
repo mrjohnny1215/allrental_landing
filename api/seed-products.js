@@ -1,11 +1,4 @@
 import { createClient } from '@supabase/supabase-js'
-import { readFileSync } from 'fs'
-import { fileURLToPath } from 'url'
-import path from 'path'
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const productsPath = path.join(__dirname, '../../public/data/products.json')
-const productsData = JSON.parse(readFileSync(productsPath, 'utf8'))
 
 const url = process.env.VITE_SUPABASE_URL || 'https://svohcuyxnovcgakfvxms.supabase.co'
 const key = process.env.VITE_SUPABASE_ANON_KEY || 'sb_publishable_i6nElHWjlgfcZemVMdMZhw_LVZptJ9W'
@@ -18,6 +11,10 @@ export default async function handler(req, res) {
   }
 
   try {
+    const productsRes = await fetch(`${req.headers.host || 'allrental-landing.vercel.app'}/data/products.json`)
+    if (!productsRes.ok) throw new Error('products.json fetch failed')
+    const productsData = await productsRes.json()
+
     const payload = productsData.map((p) => ({
       name: p.name || null,
       brand: p.brand || null,
