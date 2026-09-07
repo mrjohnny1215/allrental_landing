@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useSearchParams, useParams, Link } from 'react-router-dom'
-import { getApartmentBySlug } from '../config'
+import { getApartmentBySlug, APARTMENTS } from '../config'
 import Header from '../components/Header'
 import Hero from '../components/Hero'
 import Categories from '../components/Categories'
