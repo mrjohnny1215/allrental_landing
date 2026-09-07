@@ -32,7 +32,7 @@ app.get('/', (_req, res) => {
   res.sendFile(join(__dirname, 'dist', 'index.html'))
 })
 
-app.get('/mediale', (_req, res) => {
+app.get(['/mediale', '/hillstate'], (_req, res) => {
   res.sendFile(join(__dirname, 'dist', 'index.html'))
 })
 app.get('/deungchon', (_req, res) => {

@@ -18,6 +18,25 @@ export const APARTMENTS = {
     ogImage: '/images/gangbyeon-og.jpg',
     phone: '1588-0000',
   },
+    hillstate: {
+    slug: 'hillstate',
+    name: '힐스테이트 메디알레',
+    location: '서울 은평구 대조동',
+    moveInDate: '2026년 10월',
+    households: '2,451세대',
+    heroBadge: '입주예정자 특별 상담',
+    heroTitle: '힐스테이트 메디알레\n입주 준비 렌탈 비교 상담',
+    heroDescription:
+      '정수기·비데·공기청정기·매트리스까지\n입주 전에 미리 비교하고 준비하세요.',
+    heroImage: '/images/mediale-hero.jpg',
+    recommendedProducts: [],
+    campaign: 'mediale',
+    seoTitle: '힐스테이트 메디알레 입주 렌탈 비교상담 | ALL렌탈',
+    seoDescription:
+      '힐스테이트 메디알레 입주 예정자 렌탈 상담. 정수기·비데·공기청정기·매트리스 비교 상담 신청.',
+    ogImage: '/images/mediale-og.jpg',
+    phone: '010-6789-6519',
+  },
   mediale: {
     slug: 'mediale',
     name: '힐스테이트 메디알레',
