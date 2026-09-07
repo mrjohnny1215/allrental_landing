@@ -4,13 +4,36 @@ const url = process.env.VITE_SUPABASE_URL || 'https://fmirayitizchewkfhgxh.supab
 const key = process.env.VITE_SUPABASE_ANON_KEY || 'sb_publishable_j1TVHyct-lpIsP500xPpww_g'
 const supabase = createClient(url, key)
 
-const KAKAO_REST_API_KEY = '469483cab1a10473bbd578f3e73a1be7'
-// 서버 환경변수나 직접 발급된 토큰을 활용하도록 설정
-let KAKAO_ACCESS_TOKEN = process.env.KAKAO_ACCESS_TOKEN || ''
+const REST_API_KEY = '469483cab1a10473bbd578f3e73a1be7'
+let ACCESS_TOKEN = process.env.KAKAO_ACCESS_TOKEN || 'nmDl6RX3VTuU4BgMjQQKKjlRGNZlU02PAAAAAQoXC9cAAAGgeszLkCEj9baI01p6'
+let REFRESH_TOKEN = process.env.KAKAO_REFRESH_TOKEN || 'TaL4sOzSS-sqpI1lXIcffOxMpRX4pDmlAAAAAgoXC9cAAAGgeszLiiEj9baI01p6'
 
+// 토큰 자동 갱신 함수
+async function refreshKakaoToken() {
+  try {
+    const res = await fetch('https://kauth.kakao.com/oauth/token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        grant_type: 'refresh_token',
+        client_id: REST_API_KEY,
+        refresh_token: REFRESH_TOKEN
+      }).toString()
+    })
+    const data = await res.json()
+    if (data.access_token) {
+      ACCESS_TOKEN = data.access_token
+      if (data.refresh_token) REFRESH_TOKEN = data.refresh_token
+      return true
+    }
+  } catch (err) {
+    console.error('카카오 토큰 갱신 실패:', err)
+  }
+  return false
+}
+
+// 카카오톡 '나에게 보내기' 발송 함수
 async function sendKakaoAlert(lead) {
-  if (!KAKAO_ACCESS_TOKEN) return
-
   const templateObject = {
     object_type: 'text',
     text: `[신규 렌탈 상담 접수]\n\n` +
@@ -26,17 +49,28 @@ async function sendKakaoAlert(lead) {
     button_title: '상담 리드 확인'
   }
 
-  try {
-    await fetch('https://kapi.kakao.com/v2/api/talk/memo/default/send', {
+  const postMessage = async (token) => {
+    return await fetch('https://kapi.kakao.com/v2/api/talk/memo/default/send', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${KAKAO_ACCESS_TOKEN}`,
+        'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       body: new URLSearchParams({ template_object: JSON.stringify(templateObject) }).toString()
     })
+  }
+
+  try {
+    let res = await postMessage(ACCESS_TOKEN)
+    // 401(토큰 만료) 발생 시 자동 갱신 후 재전송
+    if (res.status === 401) {
+      const refreshed = await refreshKakaoToken()
+      if (refreshed) {
+        await postMessage(ACCESS_TOKEN)
+      }
+    }
   } catch (err) {
-    console.error('카카오톡 전송 에러:', err)
+    console.error('카카오 메시지 전송 예외:', err)
   }
 }
 
@@ -68,6 +102,7 @@ export default async function handler(req, res) {
     const { data, error } = await supabase.from('leads').insert([lead]).select('*').single()
     if (error) throw error
 
+    // 카카오톡 알림 발송
     await sendKakaoAlert(lead)
 
     return res.status(201).json({ ok: true, id: lead.id, data })
