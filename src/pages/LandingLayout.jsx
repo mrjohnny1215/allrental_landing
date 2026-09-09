@@ -62,8 +62,11 @@ export default function LandingLayout({ slug }) {
     )
   }
 
+  const brandBg = apartment.brandColor || '#0b1c2e'
+  const brandAccent = apartment.brandAccent || '#c7a14a'
+
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white" style={{ color: '#0b1c2e' }}>
       <Header apartment={apartment} />
       <main>
         <Hero apartment={apartment} />
@@ -73,10 +76,45 @@ export default function LandingLayout({ slug }) {
         <CompareIntro />
         <MultiProductConsultation />
         <Trust apartment={apartment} />
-        <ConsultationForm
-          apartment={apartment}
-          utm={{ utmSource, utmMedium, utmCampaign, utmContent }}
-        />
+        <section
+          id="consult"
+          className="relative"
+          style={{
+            background: `linear-gradient(180deg, ${brandBg} 0%, ${brandBg}dd 100%)`,
+            color: '#fff',
+          }}
+        >
+          <div className="mx-auto max-w-6xl px-5 py-16">
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-12">
+              <div className="flex flex-col justify-center">
+                <h2 className="text-2xl font-bold md:text-3xl">
+                  [{apartment.name}] 입주민 렌탈 상담 신청
+                </h2>
+                <p className="mt-3 text-sm text-gray-200">
+                  상담 신청 후 제품과 조건을 비교해 안내드립니다.
+                  <br />
+                  신청만으로 계약이 확정되지 않습니다.
+                </p>
+                <div className="mt-6 flex flex-wrap items-center gap-2 text-xs text-gray-200">
+                  <span className="rounded-full bg-white/10 px-3 py-1">
+                    비교 상담
+                  </span>
+                  <span className="rounded-full bg-white/10 px-3 py-1">
+                    상담 후 결정
+                  </span>
+                  <span className="rounded-full bg-white/10 px-3 py-1">
+                    간편 신청
+                  </span>
+                </div>
+              </div>
+              <ConsultationForm
+                apartment={apartment}
+                utm={{ utmSource, utmMedium, utmCampaign, utmContent }}
+                brandAccent={brandAccent}
+              />
+            </div>
+          </div>
+        </section>
       </main>
       <Footer apartment={apartment} />
       <KakaoChatButton />
