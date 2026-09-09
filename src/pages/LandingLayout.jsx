@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useSearchParams, useParams, Link } from 'react-router-dom'
-import { getApartmentBySlug, APARTMENTS } from '../config'
+import { getApartmentBySlug } from '../config'
 import Header from '../components/Header'
 import Hero from '../components/Hero'
 import Categories from '../components/Categories'
@@ -11,6 +11,7 @@ import MultiProductConsultation from '../components/MultiProductConsultation'
 import Trust from '../components/Trust'
 import ConsultationForm from '../components/ConsultationForm'
 import Footer from '../components/Footer'
+import KakaoChatButton from '../components/KakaoChatButton'
 
 export default function LandingLayout({ slug }) {
   const params = useParams()
@@ -78,6 +79,7 @@ export default function LandingLayout({ slug }) {
         />
       </main>
       <Footer apartment={apartment} />
+      <KakaoChatButton />
     </div>
   )
 }
