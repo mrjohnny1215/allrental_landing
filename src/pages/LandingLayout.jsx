@@ -4,6 +4,7 @@ import { getApartmentBySlug } from '../config'
 import Header from '../components/Header'
 import Hero from '../components/Hero'
 import Categories from '../components/Categories'
+import BrandCompare from '../components/BrandCompare'
 import HowItWorks from '../components/HowItWorks'
 import Recommendation from '../components/Recommendation'
 import CompareIntro from '../components/CompareIntro'
@@ -12,6 +13,7 @@ import Trust from '../components/Trust'
 import ConsultationForm from '../components/ConsultationForm'
 import Footer from '../components/Footer'
 import KakaoChatButton from '../components/KakaoChatButton'
+import Faq from '../components/Faq'
 
 export default function LandingLayout({ slug }) {
   const params = useParams()
@@ -70,12 +72,14 @@ export default function LandingLayout({ slug }) {
       <Header apartment={apartment} />
       <main>
         <Hero apartment={apartment} />
+        <BrandCompare />
         <Categories />
         <HowItWorks />
         <Recommendation products={products} />
         <CompareIntro />
         <MultiProductConsultation />
         <Trust apartment={apartment} />
+        <Faq />
         <section
           id="consult"
           className="relative"

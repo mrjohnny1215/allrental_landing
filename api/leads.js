@@ -3,6 +3,7 @@ import { createClient } from '@supabase/supabase-js'
 const url = process.env.VITE_SUPABASE_URL || 'https://fmirayitizchewkfhgxh.supabase.co'
 const key = process.env.VITE_SUPABASE_ANON_KEY || 'sb_publishable_j1TVHyct-lpIsP500xPpww_g'
 const supabase = createClient(url, key)
+const recentRequests = new Map()
 
 const REST_API_KEY = '469483cab1a10473bbd578f3e73a1be7'
 let ACCESS_TOKEN = process.env.KAKAO_ACCESS_TOKEN || 'nmDl6RX3VTuU4BgMjQQKKjlRGNZlU02PAAAAAQoXC9cAAAGgeszLkCEj9baI01p6'
@@ -83,18 +84,36 @@ export default async function handler(req, res) {
 
   try {
     const body = req.body || {}
+    const name = String(body.name || '').trim()
+    const phone = String(body.phone || '').replace(/[^0-9]/g, '')
+    const clientKey = req.headers['x-forwarded-for']?.split(',')[0]?.trim() || 'unknown'
+    const now = Date.now()
+
+    if (recentRequests.get(clientKey) > now - 60_000) {
+      return res.status(429).json({ message: '잠시 후 다시 시도해주세요.' })
+    }
+    recentRequests.set(clientKey, now)
+
+    if (!name || !/^01[0-9]{8,9}$/.test(phone) || !body.privacyConsent) {
+      return res.status(400).json({ message: '이름, 연락처, 개인정보 동의 여부를 확인해주세요.' })
+    }
+
     const lead = {
       id: `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`,
       created_at: new Date().toISOString(),
       apartment_slug: body.apartmentSlug || body.slug || 'hillstate',
       apartment_name: body.apartmentName || body.apartment || '힐스테이트 메디알레',
-      name: body.name || null,
-      phone: body.phone || null,
+      name,
+      phone,
       interest: body.interest || null,
       products: Array.isArray(body.products) ? body.products : (body.products ? [body.products] : []),
       move_in_date: body.moveInDate || null,
       message: body.message || body.dongHo || null,
       privacy_consent: !!(body.privacyConsent ?? body.privacy_consent),
+      utm_source: body.utmSource || null,
+      utm_medium: body.utmMedium || null,
+      utm_campaign: body.utmCampaign || null,
+      utm_content: body.utmContent || null,
       status: 'NEW',
       source: body.source || 'landing_hillstate',
     }

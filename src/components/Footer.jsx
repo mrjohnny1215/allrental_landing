@@ -1,4 +1,4 @@
-export default function Footer({ apartment }) {
+export default function Footer() {
   return (
     <footer className="bg-deep-navy">
       <div className="mx-auto max-w-6xl px-5 py-10">
@@ -11,10 +11,6 @@ export default function Footer({ apartment }) {
             <div>입주민 렌탈 상담</div>
             <div>개인정보처리방침</div>
             <div>상담안내</div>
-          </div>
-          <div>
-            <div className="text-sm font-semibold text-white">상담 문의</div>
-            <div className="mt-1 text-sm text-gray-200">{apartment.phone || '1588-0000'}</div>
           </div>
         </div>
         <address className="mt-8 not-italic text-xs leading-6 text-gray-300">

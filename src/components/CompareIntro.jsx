@@ -3,13 +3,13 @@ export default function CompareIntro() {
     <section className="bg-surface">
       <div className="mx-auto max-w-6xl px-5 py-16">
         <h2 className="text-center text-xl font-bold text-deep-navy md:text-2xl">제품 비교 안내</h2>
-        <p className="mt-2 text-center text-sm text-muted">
-          제품마다 조건과 혜택이 다릅니다. 여러 제품을 비교한 뒤 결정하시면 불필요한 지출을 줄일 수 있습니다.
-        </p>
-        <div className="mt-6 rounded-2xl bg-white p-5 text-sm text-deep-navy shadow-sm">
-          <p>• 브랜드별 렌탈 요금은 설치비·AS·이벤트까지 비교해야 정확합니다.</p>
-          <p className="mt-2">• 상담 신청만으로 계약이 확정되지 않습니다.</p>
+        <p className="mt-2 text-center text-sm text-muted">같은 제품군이라도 계약 조건과 관리 방식이 다를 수 있습니다.</p>
+        <div className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-5">
+          {['월 렌탈료', '약정 기간', '관리 방식', '제품 기능', '설치 가능일'].map((item) => (
+            <div key={item} className="rounded-2xl bg-white p-4 text-center text-sm font-semibold text-deep-navy shadow-sm">{item}</div>
+          ))}
         </div>
+        <p className="mt-5 text-center text-xs text-muted">상담 신청만으로 계약이 확정되지 않습니다.</p>
       </div>
     </section>
   )

@@ -17,6 +17,11 @@ export default function ConsultationForm({ apartment, utm, brandAccent = '#c7a14
       alert('개인정보 수집 및 이용에 동의해주세요.')
       return
     }
+    const phone = form.phone.replace(/[^0-9]/g, '')
+    if (!/^01[0-9]{8,9}$/.test(phone)) {
+      alert('연락 가능한 휴대폰 번호를 확인해주세요.')
+      return
+    }
     setStatus('loading')
     try {
       const res = await fetch('/api/leads', {
@@ -64,10 +69,14 @@ export default function ConsultationForm({ apartment, utm, brandAccent = '#c7a14
         <div>
           <label className="text-sm font-semibold text-deep-navy">연락처</label>
           <input
+            type="tel"
             value={form.phone}
             onChange={(e) => setForm((prev) => ({ ...prev, phone: e.target.value }))}
             className="mt-1 w-full rounded-xl border border-gray-200 px-3 py-3 text-sm"
             placeholder="010-0000-0000"
+            inputMode="numeric"
+            autoComplete="tel"
+            pattern="01[0-9]-?[0-9]{3,4}-?[0-9]{4}"
             required
           />
         </div>
@@ -106,7 +115,7 @@ export default function ConsultationForm({ apartment, utm, brandAccent = '#c7a14
             onChange={(e) => setForm((prev) => ({ ...prev, privacyConsent: e.target.checked }))}
             className="mt-1"
           />
-          <span>개인정보 수집 및 이용에 동의합니다. 상담 신청 후 계약이 확정되지 않습니다.</span>
+          <span><strong>수집 항목:</strong> 이름, 연락처, 상담 요청사항 · <strong>이용 목적:</strong> 렌탈 상담 안내. 상담 신청만으로 계약이 확정되지 않습니다.</span>
         </label>
         <button
           type="submit"
