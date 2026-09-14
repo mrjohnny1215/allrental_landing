@@ -110,8 +110,13 @@ function HeaderDefault() {
 function FooterDefault() {
   return (
     <footer className="border-t border-gray-100 bg-white">
-      <div className="mx-auto max-w-6xl px-5 py-8 text-center text-xs text-muted">
-        © {new Date().getFullYear()} ALL렌탈. 상담 신청만으로 계약이 확정되지 않습니다.
+      <div className="mx-auto max-w-6xl px-5 py-8 text-xs text-muted">
+        <div className="text-center">© {new Date().getFullYear()} 올(All)렌탈. 상담 신청만으로 계약이 확정되지 않습니다.</div>
+        <address className="mx-auto mt-4 max-w-3xl not-italic text-center leading-6">
+          <p>주식회사 올(All)렌탈 | 대표이사: 김성훈 | 사업자등록번호: 764-36-01626</p>
+          <p>업태: 서비스업 | 종목: 정수기, 청정기, 비데, 안마의자 렌탈</p>
+          <p>301ho, 27, Daejukseo-ro 16beon-gil, Samhyang-eup, Muan-gun, Jeonnam-Gwangju, Republic of Korea</p>
+        </address>
       </div>
     </footer>
   )
