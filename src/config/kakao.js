@@ -1,4 +1,4 @@
-export const KAKAO_CHANNEL_URL = 'https://pf.kakao.com/_xiccxmJX'
+export const KAKAO_CHANNEL_URL = 'https://pf.kakao.com/_xixcxmJX'
 export const KAKAO_CHAT_URL = `${KAKAO_CHANNEL_URL}/chat`
 export const KAKAO_SEARCH_ID = 'allrental85'
 
