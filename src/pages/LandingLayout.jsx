@@ -102,7 +102,7 @@ export default function LandingLayout({ slug }) {
                   약정, 관리 방식, 설치 가능일을 카카오톡으로 확인하세요.
                 </p>
                 <a
-                  href="http://pf.kakao.com/_xixcxMJX/chat"
+                  href="http://pf.kakao.com/_xiccxmJX/chat"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-6 inline-flex w-fit items-center gap-2 rounded-2xl bg-[#FEE500] px-5 py-4 text-base font-bold text-[#191919] transition hover:-translate-y-0.5"

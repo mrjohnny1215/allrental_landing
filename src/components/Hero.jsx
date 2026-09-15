@@ -1,7 +1,7 @@
 export default function Hero({ apartment }) {
   const lines = apartment.heroTitle.split('\n')
   const brandAccent = apartment.brandAccent || '#c7a14a'
-  const kakaoUrl = 'http://pf.kakao.com/_xixcxMJX/chat'
+  const kakaoUrl = 'http://pf.kakao.com/_xiccxmJX/chat'
 
   return (
     <section className="relative pt-16">

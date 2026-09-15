@@ -12,7 +12,7 @@ export default function KakaoChatButton() {
       alignItems: 'flex-end'
     }}>
       <a
-        href="http://pf.kakao.com/_xixcxMJX/chat"
+        href="http://pf.kakao.com/_xiccxmJX/chat"
         target="_blank"
         rel="noopener noreferrer"
         style={{
