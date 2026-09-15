@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@layer base {
+  html {
+    font-family: "Pretendard Variable", Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+}
+
 @theme {
   --color-deep-navy: #0b1c2e;
   --color-gold: #c7a14a;
