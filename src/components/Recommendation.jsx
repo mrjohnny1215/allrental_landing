@@ -237,6 +237,7 @@ function ProductCard({ rank, product }) {
   const points = product.selling_points?.points?.slice(0, 4) || []
   const label = typeof monthly === 'number' ? `월 ${monthly.toLocaleString()}원` : monthly
   const thumb = product.thumbnail || IMAGE_MAP[product.category] || '/images/products/fallback.jpg'
+  const fallbackThumb = IMAGE_MAP[product.category] || '/images/products/water.jpg'
   return (
     <div className="relative rounded-2xl border border-gray-100 bg-white p-4 shadow-sm">
       <div
@@ -247,7 +248,15 @@ function ProductCard({ rank, product }) {
         {rank}
       </div>
       <div className="mt-2 flex h-32 items-center justify-center overflow-hidden rounded-xl bg-surface">
-        <img src={thumb} alt={product.name} className="h-full w-full object-contain" />
+        <img
+          src={thumb}
+          alt={product.name}
+          className="h-full w-full object-cover"
+          onError={(event) => {
+            event.currentTarget.onerror = null
+            event.currentTarget.src = fallbackThumb
+          }}
+        />
       </div>
       <div className="mt-3 text-sm font-semibold text-deep-navy">{product.brand}</div>
       <div className="text-xs text-muted">{product.name}</div>
