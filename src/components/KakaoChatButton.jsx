@@ -18,7 +18,7 @@ export default function KakaoChatButton() {
         style={{
           backgroundColor: '#FEE500',
           color: '#191919',
-          padding: '14px 20px',
+          padding: '15px 20px',
           borderRadius: '30px',
           fontWeight: 'bold',
           textDecoration: 'none',
@@ -31,7 +31,7 @@ export default function KakaoChatButton() {
         }}
       >
         <span style={{ fontSize: '18px' }}>💬</span>
-        카카오톡 1:1 상담하기
+        카카오톡으로 비교견적 받기
       </a>
     </div>
   )

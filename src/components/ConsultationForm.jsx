@@ -123,12 +123,12 @@ export default function ConsultationForm({ apartment, utm, brandAccent = '#c7a14
           className="w-full rounded-2xl px-5 py-4 text-center text-base font-semibold text-white disabled:opacity-40"
           style={{ backgroundColor: brandAccent }}
         >
-          {status === 'loading' ? '상담 신청 중...' : '무료 상담 신청하기'}
+          {status === 'loading' ? '접수 중...' : '연락처 남기기'}
         </button>
       </div>
       {status === 'success' && (
         <div className="mt-4 rounded-2xl bg-gray-50 p-4 text-center text-sm font-semibold text-deep-navy">
-          상담 신청이 완료되었습니다. 빠른 시일 내에 연락드리겠습니다.
+          접수가 완료되었습니다. 남겨주신 연락처로 안내드리겠습니다.
         </div>
       )}
     </form>

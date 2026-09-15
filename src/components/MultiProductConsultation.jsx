@@ -38,10 +38,12 @@ export default function MultiProductConsultation() {
               <div className="mt-4 text-base font-semibold text-deep-navy">{bundle.title}</div>
               <div className="text-sm text-muted">{bundle.desc}</div>
               <a
-                href="#consult"
-                className="mt-4 inline-flex w-full items-center justify-center rounded-xl border border-deep-navy px-4 py-3 text-sm font-semibold text-deep-navy"
+                href="http://pf.kakao.com/_xixcxMJX/chat"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex w-full items-center justify-center rounded-xl bg-[#FEE500] px-4 py-3 text-sm font-bold text-[#191919]"
               >
-                한 번에 비교상담
+                카카오톡으로 비교하기
               </a>
             </div>
           ))}

@@ -1,18 +1,18 @@
 const STEPS = [
   {
     num: '01',
-    title: '상담 신청',
-    desc: '원하는 제품과 입주 예정일을\n간단히 남겨주세요.',
+    title: '카카오톡으로 문의',
+    desc: '단지명과 원하는 제품을\n간단히 알려주세요.',
   },
   {
     num: '02',
-    title: '조건 비교 안내',
-    desc: '월 렌탈료·약정·관리 방식을\n비교해 안내드립니다.',
+    title: '조건 비교 확인',
+    desc: '월 렌탈료·약정·관리 방식을\n카카오톡으로 확인하세요.',
   },
   {
     num: '03',
-    title: '선택 후 설치 일정 안내',
-    desc: '원하는 제품을 고른 뒤\n입주 일정에 맞춰 진행합니다.',
+    title: '선택 후 설치 일정 확인',
+    desc: '제품을 고른 뒤 입주 일정에\n맞춰 설치 가능일을 안내합니다.',
   },
 ]
 
@@ -21,10 +21,10 @@ export default function HowItWorks() {
     <section className="bg-surface">
       <div className="mx-auto max-w-6xl px-5 py-16">
         <h2 className="text-center text-xl font-bold text-deep-navy md:text-2xl">
-          어떤 제품을 골라야 할지 모르겠다면?
+          카카오톡으로 비교하면 더 간단합니다
         </h2>
         <p className="mt-2 text-center text-sm text-muted">
-          간단 3단계로 원하는 제품을 쉽게 찾을 수 있습니다.
+          필요한 정보만 먼저 확인하고, 원하는 제품만 골라보세요.
         </p>
         <div className="mt-10 flex flex-col gap-6 md:flex-row md:items-start md:gap-4">
           {STEPS.map((step, idx) => (

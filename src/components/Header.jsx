@@ -57,7 +57,7 @@ export default function Header({ apartment }) {
             className="hidden h-4 w-px md:block"
             style={{ backgroundColor: 'rgba(255,255,255,0.25)' }}
           />
-          <div className="text-xs text-gray-200">입주민 맞춤 렌탈 상담</div>
+          <div className="text-xs text-gray-200">입주민 렌탈 비교견적</div>
         </div>
         <nav className="hidden md:flex items-center gap-6 text-sm text-gray-200">
           <span className="flex items-center gap-2">
@@ -70,7 +70,7 @@ export default function Header({ apartment }) {
           </span>
           <span className="flex items-center gap-2">
             <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-white/10 text-xs">✔</span>
-            간편 상담 신청
+            카카오톡 간편 견적
           </span>
         </nav>
       </div>
