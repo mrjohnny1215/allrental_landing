@@ -38,7 +38,8 @@ export default function MultiProductConsultation() {
               <div className="mt-4 text-base font-semibold text-deep-navy">{bundle.title}</div>
               <div className="text-sm text-muted">{bundle.desc}</div>
               <a
-                href="http://pf.kakao.com/_xiccxmJX/chat"
+                href={KAKAO_CHAT_URL}
+                onClick={openKakaoChat}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-4 inline-flex w-full items-center justify-center rounded-xl bg-[#FEE500] px-4 py-3 text-sm font-bold text-[#191919]"
@@ -52,3 +53,4 @@ export default function MultiProductConsultation() {
     </section>
   )
 }
+import { KAKAO_CHAT_URL, openKakaoChat } from '../config/kakao'

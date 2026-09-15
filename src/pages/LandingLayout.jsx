@@ -14,6 +14,7 @@ import ConsultationForm from '../components/ConsultationForm'
 import Footer from '../components/Footer'
 import KakaoChatButton from '../components/KakaoChatButton'
 import Faq from '../components/Faq'
+import { KAKAO_CHAT_URL, openKakaoChat } from '../config/kakao'
 
 export default function LandingLayout({ slug }) {
   const params = useParams()
@@ -102,7 +103,8 @@ export default function LandingLayout({ slug }) {
                   약정, 관리 방식, 설치 가능일을 카카오톡으로 확인하세요.
                 </p>
                 <a
-                  href="http://pf.kakao.com/_xiccxmJX/chat"
+                  href={KAKAO_CHAT_URL}
+                  onClick={openKakaoChat}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-6 inline-flex w-fit items-center gap-2 rounded-2xl bg-[#FEE500] px-5 py-4 text-base font-bold text-[#191919] transition hover:-translate-y-0.5"

@@ -1,7 +1,8 @@
+import { KAKAO_CHAT_URL, openKakaoChat } from '../config/kakao'
+
 export default function Hero({ apartment }) {
   const lines = apartment.heroTitle.split('\n')
   const brandAccent = apartment.brandAccent || '#c7a14a'
-  const kakaoUrl = 'http://pf.kakao.com/_xiccxmJX/chat'
 
   return (
     <section className="relative pt-16">
@@ -41,7 +42,8 @@ export default function Hero({ apartment }) {
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <a
-              href={kakaoUrl}
+              href={KAKAO_CHAT_URL}
+              onClick={openKakaoChat}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 rounded-2xl bg-[#FEE500] px-5 py-4 text-base font-bold text-[#191919] shadow-lg shadow-black/20 transition hover:-translate-y-0.5"
