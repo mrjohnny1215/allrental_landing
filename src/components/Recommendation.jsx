@@ -97,12 +97,26 @@ export default function Recommendation({ products = [], preselected }) {
     <section id="recommend" className="bg-white">
       <div className="mx-auto max-w-6xl px-5 py-16">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-12">
-          <div>
-            <div className="h-64 w-full rounded-2xl bg-surface md:h-full" />
+          <div className="relative min-h-[360px] overflow-hidden rounded-[28px] bg-deep-navy shadow-xl md:min-h-full">
+            <img
+              src="/images/products/water.jpg"
+              alt="입주 준비 렌탈 제품"
+              className="absolute inset-0 h-full w-full object-cover opacity-80"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#07131f] via-[#07131f]/25 to-transparent" />
+            <div className="absolute inset-x-0 bottom-0 p-7 text-white">
+              <span className="inline-flex rounded-full bg-[#FEE500] px-3 py-1 text-xs font-extrabold text-[#191919]">입주 준비 체크</span>
+              <h3 className="mt-3 text-2xl font-black tracking-[-0.04em]">우리 집에 맞는<br />렌탈 조합을 찾아보세요.</h3>
+              <p className="mt-3 text-sm leading-relaxed text-white/80">생활 패턴과 입주 시기를 알려주시면<br />비교할 조건을 먼저 정리해드립니다.</p>
+            </div>
           </div>
-          <div>
-            <h2 className="text-xl font-bold text-deep-navy md:text-2xl">우리 집 맞춤 렌탈 추천</h2>
-            <p className="mt-2 text-sm text-muted">
+          <div className="rounded-[28px] border border-slate-100 bg-white p-6 shadow-sm md:p-8">
+            <div className="flex items-center gap-3">
+              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#eaf2fb] text-sm font-black text-[#2f6ea9]">01</span>
+              <span className="text-xs font-extrabold tracking-[0.14em] text-[#2f6ea9]">PERSONAL PICK</span>
+            </div>
+            <h2 className="mt-4 text-2xl font-black tracking-[-0.045em] text-deep-navy md:text-3xl">우리 집 맞춤 렌탈 추천</h2>
+            <p className="mt-2 text-sm leading-relaxed text-muted">
               간단한 정보 입력만으로 우리 집에 딱 맞는 제품을 추천해드립니다.
             </p>
             <form onSubmit={handleSubmit} className="mt-6 grid grid-cols-1 gap-4">
@@ -112,7 +126,7 @@ export default function Recommendation({ products = [], preselected }) {
                   <select
                     value={form.family}
                     onChange={(e) => setForm((prev) => ({ ...prev, family: e.target.value }))}
-                    className="mt-1 w-full rounded-xl border border-gray-200 px-3 py-3 text-sm"
+                    className="mt-1 w-full rounded-xl border border-gray-200 bg-slate-50 px-3 py-3 text-sm"
                   >
                     <option value="">선택해주세요</option>
                     {FAMILY_OPTIONS.map((o) => (
@@ -125,7 +139,7 @@ export default function Recommendation({ products = [], preselected }) {
                   <select
                     value={form.children}
                     onChange={(e) => setForm((prev) => ({ ...prev, children: e.target.value }))}
-                    className="mt-1 w-full rounded-xl border border-gray-200 px-3 py-3 text-sm"
+                    className="mt-1 w-full rounded-xl border border-gray-200 bg-slate-50 px-3 py-3 text-sm"
                   >
                     <option value="">선택해주세요</option>
                     {CHILDREN_OPTIONS.map((o) => (
@@ -140,7 +154,7 @@ export default function Recommendation({ products = [], preselected }) {
                   <select
                     value={form.products[0] || ''}
                     onChange={(e) => setForm((prev) => ({ ...prev, products: e.target.value ? [e.target.value] : [] }))}
-                    className="mt-1 w-full rounded-xl border border-gray-200 px-3 py-3 text-sm"
+                    className="mt-1 w-full rounded-xl border border-gray-200 bg-slate-50 px-3 py-3 text-sm"
                   >
                     <option value="">선택해주세요</option>
                     {PRODUCT_OPTIONS.map((o) => (
@@ -153,7 +167,7 @@ export default function Recommendation({ products = [], preselected }) {
                   <select
                     value={form.budget}
                     onChange={(e) => setForm((prev) => ({ ...prev, budget: e.target.value }))}
-                    className="mt-1 w-full rounded-xl border border-gray-200 px-3 py-3 text-sm"
+                    className="mt-1 w-full rounded-xl border border-gray-200 bg-slate-50 px-3 py-3 text-sm"
                   >
                     <option value="">선택해주세요</option>
                     {BUDGET_OPTIONS.map((o) => (
@@ -168,7 +182,7 @@ export default function Recommendation({ products = [], preselected }) {
                   <select
                     value={form.features[0] || ''}
                     onChange={(e) => setForm((prev) => ({ ...prev, features: e.target.value ? [e.target.value] : [] }))}
-                    className="mt-1 w-full rounded-xl border border-gray-200 px-3 py-3 text-sm"
+                    className="mt-1 w-full rounded-xl border border-gray-200 bg-slate-50 px-3 py-3 text-sm"
                   >
                     <option value="">선택해주세요</option>
                     {FEATURE_OPTIONS.map((o) => (
@@ -181,7 +195,7 @@ export default function Recommendation({ products = [], preselected }) {
                   <select
                     value={form.moveIn}
                     onChange={(e) => setForm((prev) => ({ ...prev, moveIn: e.target.value }))}
-                    className="mt-1 w-full rounded-xl border border-gray-200 px-3 py-3 text-sm"
+                    className="mt-1 w-full rounded-xl border border-gray-200 bg-slate-50 px-3 py-3 text-sm"
                   >
                     <option value="">선택해주세요</option>
                     {MOVE_IN_OPTIONS.map((o) => (
@@ -193,7 +207,7 @@ export default function Recommendation({ products = [], preselected }) {
               <button
                 type="submit"
                 disabled={!isValid}
-                className="w-full rounded-2xl bg-deep-navy px-5 py-4 text-center text-base font-semibold text-white disabled:opacity-40"
+                className="w-full rounded-2xl bg-deep-navy px-5 py-4 text-center text-base font-extrabold text-white transition enabled:hover:bg-[#173757] disabled:opacity-40"
               >
                 맞춤 추천 받기 →
               </button>

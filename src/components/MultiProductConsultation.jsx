@@ -1,26 +1,32 @@
+import { KAKAO_CHAT_URL, openKakaoChat } from '../config/kakao'
+
 const BUNDLES = [
   {
     id: 'water-bidet',
     title: '정수기 + 비데',
     desc: '필수 가전을 한 번에 편리하게',
+    images: ['/images/products/water.jpg', '/images/products/bidet.jpg'],
   },
   {
     id: 'water-purifier',
     title: '정수기 + 공기청정기',
     desc: '깨끗한 물과 공기를 동시에',
+    images: ['/images/products/water.jpg', '/images/products/purifier.jpg'],
   },
   {
     id: 'water-bidet-mattress',
     title: '정수기 + 비데 + 매트리스',
     desc: '생활 필수품을 스마트하게',
+    images: ['/images/products/water.jpg', '/images/products/bidet.jpg', '/images/products/mattress.jpg'],
   },
 ]
 
 export default function MultiProductConsultation() {
   return (
-    <section className="bg-surface">
+    <section className="bg-[#f5f7f9]">
       <div className="mx-auto max-w-6xl px-5 py-16">
-        <h2 className="text-center text-xl font-bold text-deep-navy md:text-2xl">
+        <p className="text-center text-xs font-extrabold tracking-[0.16em] text-[#2f6ea9]">MOVE-IN BUNDLE</p>
+        <h2 className="mt-2 text-center text-2xl font-black tracking-[-0.045em] text-deep-navy md:text-3xl">
           입주민이라면 여러 제품을 한 번에 상담하세요
         </h2>
         <p className="mt-2 text-center text-sm text-muted">
@@ -30,19 +36,21 @@ export default function MultiProductConsultation() {
           {BUNDLES.map((bundle) => (
             <div
               key={bundle.id}
-              className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm"
+              className="group overflow-hidden rounded-[24px] border border-slate-100 bg-white p-3 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
             >
-              <div className="flex h-32 items-center justify-center rounded-xl bg-surface">
-                <span className="text-sm font-semibold text-deep-navy">{bundle.title}</span>
+              <div className="grid h-44 gap-1 overflow-hidden rounded-[16px] bg-[#eaf2fb] p-1" style={{ gridTemplateColumns: `repeat(${bundle.images.length}, minmax(0, 1fr))` }}>
+                {bundle.images.map((image, index) => (
+                  <img key={image} src={image} alt="" className="h-full w-full rounded-xl object-cover transition duration-300 group-hover:scale-105" style={{ transitionDelay: `${index * 40}ms` }} />
+                ))}
               </div>
-              <div className="mt-4 text-base font-semibold text-deep-navy">{bundle.title}</div>
-              <div className="text-sm text-muted">{bundle.desc}</div>
+              <div className="mt-5 px-2 text-lg font-black tracking-[-0.035em] text-deep-navy">{bundle.title}</div>
+              <div className="px-2 text-sm text-muted">{bundle.desc}</div>
               <a
                 href={KAKAO_CHAT_URL}
                 onClick={openKakaoChat}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-4 inline-flex w-full items-center justify-center rounded-xl bg-[#FEE500] px-4 py-3 text-sm font-bold text-[#191919]"
+                className="mx-2 mb-2 mt-5 inline-flex w-[calc(100%-1rem)] items-center justify-center rounded-xl bg-[#FEE500] px-4 py-3 text-sm font-extrabold text-[#191919] transition hover:bg-[#ffef42]"
               >
                 카카오톡으로 비교하기
               </a>
@@ -53,4 +61,3 @@ export default function MultiProductConsultation() {
     </section>
   )
 }
-import { KAKAO_CHAT_URL, openKakaoChat } from '../config/kakao'
