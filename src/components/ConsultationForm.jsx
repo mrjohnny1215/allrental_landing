@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { KAKAO_CHAT_URL, openKakaoChat } from '../config/kakao'
+import { openChannelTalk } from './ChannelTalk'
 
 export default function ConsultationForm({ apartment, utm, brandAccent = '#c7a14a' }) {
   const [form, setForm] = useState({
@@ -130,15 +130,13 @@ export default function ConsultationForm({ apartment, utm, brandAccent = '#c7a14
       {status === 'success' && (
         <div className="mt-4 rounded-2xl bg-gray-50 p-4 text-center text-sm font-semibold text-deep-navy">
           <p>접수가 완료되었습니다. 남겨주신 연락처로 안내드리겠습니다.</p>
-          <a
-            href={KAKAO_CHAT_URL}
-            onClick={openKakaoChat}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-3 inline-flex rounded-xl bg-[#FEE500] px-4 py-2.5 text-xs font-bold text-[#191919]"
+          <button
+            type="button"
+            onClick={openChannelTalk}
+            className="mt-3 inline-flex rounded-xl bg-deep-navy px-4 py-2.5 text-xs font-bold text-white"
           >
-            더 빠른 안내가 필요하면 카카오톡으로 이어가기 →
-          </a>
+            바로 채팅으로 문의하기 →
+          </button>
         </div>
       )}
     </form>
