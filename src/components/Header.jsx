@@ -70,7 +70,7 @@ export default function Header({ apartment }) {
           </span>
           <span className="flex items-center gap-2">
             <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-white/10 text-xs">✔</span>
-            카카오톡 1:1 상담
+            30초 맞춤 견적 신청
           </span>
         </nav>
       </div>

@@ -1,5 +1,3 @@
-import { KAKAO_CHAT_URL, openKakaoChat } from '../config/kakao'
-
 export default function Hero({ apartment }) {
   const lines = apartment.heroTitle.split('\n')
   const brandAccent = apartment.brandAccent || '#c7a14a'
@@ -27,7 +25,7 @@ export default function Hero({ apartment }) {
               className="inline-flex rounded-full px-3 py-1.5 text-xs font-extrabold tracking-wide"
               style={{ backgroundColor: brandAccent, color: '#1b1b1b' }}
             >
-              카카오톡 1:1 상담
+              30초 맞춤 견적 신청
             </span>
           </div>
           <h1 className="mt-5 whitespace-pre-line text-4xl font-black leading-[1.18] tracking-[-0.055em] text-white md:text-6xl">
@@ -39,18 +37,14 @@ export default function Hero({ apartment }) {
             ))}
           </h1>
           <p className="mt-5 max-w-xl text-base font-medium leading-relaxed text-white/90 md:text-lg">
-            월 렌탈료부터 약정·관리 방식·설치 가능일까지,<br className="hidden md:block" /> 카카오톡으로 조건을 한 번에 비교해보세요.
+            월 렌탈료부터 약정·관리 방식·설치 가능일까지,<br className="hidden md:block" /> 우리 집 조건에 맞는 렌탈 구성을 한 번에 비교해보세요.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <a
-              href={KAKAO_CHAT_URL}
-              onClick={openKakaoChat}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#consult"
               className="inline-flex items-center justify-center gap-2 rounded-2xl bg-[#FEE500] px-6 py-4 text-base font-extrabold text-[#191919] shadow-lg shadow-black/30 transition hover:-translate-y-0.5 hover:bg-[#ffef42]"
             >
-              <span aria-hidden="true">💬</span>
-              카카오톡으로 1:1 상담하기
+              내 입주 조건으로 견적 보기
               <span aria-hidden="true">→</span>
             </a>
             <a

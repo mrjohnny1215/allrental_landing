@@ -1,5 +1,3 @@
-import { KAKAO_CHAT_URL, openKakaoChat } from '../config/kakao'
-
 const BUNDLES = [
   {
     id: 'water-bidet',
@@ -46,13 +44,10 @@ export default function MultiProductConsultation() {
               <div className="mt-5 px-2 text-lg font-black tracking-[-0.035em] text-deep-navy">{bundle.title}</div>
               <div className="px-2 text-sm text-muted">{bundle.desc}</div>
               <a
-                href={KAKAO_CHAT_URL}
-                onClick={openKakaoChat}
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#consult"
                 className="mx-2 mb-2 mt-5 inline-flex w-[calc(100%-1rem)] items-center justify-center rounded-xl bg-[#FEE500] px-4 py-3 text-sm font-extrabold text-[#191919] transition hover:bg-[#ffef42]"
               >
-                카카오톡으로 비교하기
+                이 구성으로 견적 신청
               </a>
             </div>
           ))}

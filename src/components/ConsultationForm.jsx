@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { KAKAO_CHAT_URL, openKakaoChat } from '../config/kakao'
 
 export default function ConsultationForm({ apartment, utm, brandAccent = '#c7a14a' }) {
   const [form, setForm] = useState({
@@ -123,12 +124,21 @@ export default function ConsultationForm({ apartment, utm, brandAccent = '#c7a14
           className="w-full rounded-2xl px-5 py-4 text-center text-base font-semibold text-white disabled:opacity-40"
           style={{ backgroundColor: brandAccent }}
         >
-          {status === 'loading' ? '접수 중...' : '연락처 남기기'}
+          {status === 'loading' ? '접수 중...' : '맞춤 견적 신청하기'}
         </button>
       </div>
       {status === 'success' && (
         <div className="mt-4 rounded-2xl bg-gray-50 p-4 text-center text-sm font-semibold text-deep-navy">
-          접수가 완료되었습니다. 남겨주신 연락처로 안내드리겠습니다.
+          <p>접수가 완료되었습니다. 남겨주신 연락처로 안내드리겠습니다.</p>
+          <a
+            href={KAKAO_CHAT_URL}
+            onClick={openKakaoChat}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-3 inline-flex rounded-xl bg-[#FEE500] px-4 py-2.5 text-xs font-bold text-[#191919]"
+          >
+            더 빠른 안내가 필요하면 카카오톡으로 이어가기 →
+          </a>
         </div>
       )}
     </form>

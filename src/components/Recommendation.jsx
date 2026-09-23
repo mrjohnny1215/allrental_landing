@@ -270,7 +270,7 @@ function ProductCard({ rank, product }) {
         href="#consult"
         className="mt-3 inline-flex w-full items-center justify-center rounded-xl border border-deep-navy px-4 py-3 text-sm font-semibold text-deep-navy"
       >
-        상담하기
+        이 제품으로 견적 신청
       </a>
     </div>
   )

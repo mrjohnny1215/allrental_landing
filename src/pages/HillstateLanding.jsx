@@ -132,8 +132,8 @@ export default function HillstateLanding() {
                 <a href="#quote-form" className="inline-flex items-center justify-center rounded-xl bg-[#8F1D18] px-6 py-4 text-base font-semibold text-white">
                   무료 견적 받기 →
                 </a>
-                <a href="#quote-form" className="inline-flex items-center justify-center rounded-xl border-2 border-[#8F1D18] px-6 py-4 text-base font-semibold text-[#8F1D18]">
-                  카카오톡 상담
+                <a href="#products" className="inline-flex items-center justify-center rounded-xl border-2 border-[#8F1D18] px-6 py-4 text-base font-semibold text-[#8F1D18]">
+                  비교 가능한 제품 보기
                 </a>
               </div>
             </div>
@@ -296,8 +296,7 @@ export default function HillstateLanding() {
           <h2 className="text-2xl font-bold text-white md:text-3xl">힐스테이트 입주민의 더 나은 생활을 위해</h2>
           <p className="mt-2 text-sm text-white/80">정수기부터 안마의자까지, 한 번에 상담받아보세요!</p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
-            <a href="tel:1600-1234" className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-4 text-base font-semibold text-[#8F1D18]">☎ 전화 상담</a>
-            <a href="#quote-form" className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-white px-6 py-4 text-base font-semibold text-white">● 카카오톡 상담</a>
+            <a href="#products" className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-white px-6 py-4 text-base font-semibold text-white">비교 가능한 제품 보기</a>
             <a href="#quote-form" className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-4 text-base font-semibold text-[#8F1D18]">무료 견적 받기</a>
           </div>
         </div>

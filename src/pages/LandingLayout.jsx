@@ -12,9 +12,7 @@ import MultiProductConsultation from '../components/MultiProductConsultation'
 import Trust from '../components/Trust'
 import ConsultationForm from '../components/ConsultationForm'
 import Footer from '../components/Footer'
-import KakaoChatButton from '../components/KakaoChatButton'
 import Faq from '../components/Faq'
-import { KAKAO_CHAT_URL, openKakaoChat } from '../config/kakao'
 
 export default function LandingLayout({ slug }) {
   const params = useParams()
@@ -93,26 +91,15 @@ export default function LandingLayout({ slug }) {
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-12">
               <div className="flex flex-col justify-center">
                 <span className="inline-flex w-fit rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-gray-100">
-                  카카오톡으로 간편 비교견적
+                  입주민 맞춤 렌탈 비교
                 </span>
                 <h2 className="text-2xl font-bold md:text-3xl">
-                  [{apartment.name}]<br />입주 전 렌탈, 카카오톡으로 비교하세요
+                  [{apartment.name}]<br />입주 전 렌탈, 내 조건으로 비교하세요
                 </h2>
                 <p className="mt-3 text-sm text-gray-200">
                   정수기·비데·공기청정기·매트리스의 월 렌탈료,
-                  약정, 관리 방식, 설치 가능일을 카카오톡으로 확인하세요.
+                  약정, 관리 방식, 설치 가능일을 직접 선택해 확인하세요.
                 </p>
-                <a
-                  href={KAKAO_CHAT_URL}
-                  onClick={openKakaoChat}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-6 inline-flex w-fit items-center gap-2 rounded-2xl bg-[#FEE500] px-5 py-4 text-base font-bold text-[#191919] transition hover:-translate-y-0.5"
-                >
-                  <span aria-hidden="true">💬</span>
-                  카카오톡으로 비교견적 받기
-                  <span aria-hidden="true">→</span>
-                </a>
                 <div className="mt-6 flex flex-wrap items-center gap-2 text-xs text-gray-200">
                   <span className="rounded-full bg-white/10 px-3 py-1">
                     여러 브랜드 비교
@@ -125,13 +112,10 @@ export default function LandingLayout({ slug }) {
                   </span>
                 </div>
               </div>
-              <details className="group rounded-2xl border border-white/20 bg-white/5 p-5">
-                <summary className="cursor-pointer list-none text-sm font-semibold text-white">
-                  카카오톡 사용이 어려우신가요?
-                  <span className="ml-2 text-gray-300 group-open:hidden">연락처 남기기 →</span>
-                </summary>
-                <p className="mt-3 text-xs leading-relaxed text-gray-200">
-                  연락처를 남겨주시면 렌탈 비교 안내를 도와드립니다.
+              <div>
+                <h3 className="text-xl font-bold text-white">30초 맞춤 견적 신청</h3>
+                <p className="mt-2 text-sm leading-relaxed text-gray-200">
+                  필요한 제품과 연락처를 남겨주시면, 비교 가능한 조건을 안내드립니다.
                 </p>
                 <div className="mt-4">
                   <ConsultationForm
@@ -140,13 +124,12 @@ export default function LandingLayout({ slug }) {
                     brandAccent={brandAccent}
                   />
                 </div>
-              </details>
+              </div>
             </div>
           </div>
         </section>
       </main>
       <Footer apartment={apartment} />
-      <KakaoChatButton />
     </div>
   )
 }
