@@ -126,6 +126,7 @@ export default async function handler(req, res) {
 
     return res.status(201).json({ ok: true, id: lead.id, data })
   } catch (err) {
-    return res.status(500).json({ message: err.message || 'Lead 저장 실패' })
+    console.error('Lead 저장 실패:', err)
+    return res.status(503).json({ message: '상담 접수 저장 연결을 확인 중입니다. 채팅으로 문의해주세요.' })
   }
 }

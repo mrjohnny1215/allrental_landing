@@ -53,8 +53,8 @@ export default function ConsultationForm({ apartment, utm, brandAccent = '#c7a14
       setStatus('success')
       setForm({ name: '', phone: '', interest: '', moveInDate: '', message: '', privacyConsent: false })
     } catch (err) {
-      alert(err.message)
-      setStatus('idle')
+      console.error('상담 접수 저장 실패:', err)
+      setStatus('fallback')
     }
   }
 
@@ -141,6 +141,18 @@ export default function ConsultationForm({ apartment, utm, brandAccent = '#c7a14
             className="mt-3 inline-flex rounded-xl bg-deep-navy px-4 py-2.5 text-xs font-bold text-white"
           >
             바로 채팅으로 문의하기 →
+          </button>
+        </div>
+      )}
+      {status === 'fallback' && (
+        <div className="mt-4 rounded-2xl bg-amber-50 p-4 text-center text-sm font-semibold text-deep-navy">
+          <p>접수 저장 연결을 확인 중입니다. 아래 채팅으로 바로 문의를 남겨주세요.</p>
+          <button
+            type="button"
+            onClick={openChannelTalk}
+            className="mt-3 inline-flex rounded-xl bg-deep-navy px-4 py-2.5 text-xs font-bold text-white"
+          >
+            채팅으로 상담 이어가기 →
           </button>
         </div>
       )}
