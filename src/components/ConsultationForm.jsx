@@ -97,10 +97,11 @@ export default function ConsultationForm({ apartment, utm, brandAccent = '#c7a14
         <div>
           <label className="text-sm font-semibold text-deep-navy">입주예정일</label>
           <input
+            type="date"
             value={form.moveInDate}
             onChange={(e) => setForm((prev) => ({ ...prev, moveInDate: e.target.value }))}
             className="mt-1 w-full rounded-xl border border-gray-200 px-3 py-3 text-sm text-deep-navy placeholder:text-slate-400"
-            placeholder="2026-10"
+            aria-label="입주예정일 선택"
           />
         </div>
         <div>
