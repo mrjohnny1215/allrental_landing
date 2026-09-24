@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js'
 
-const url = process.env.VITE_SUPABASE_URL || 'https://fmirayitizchewkfhgxh.supabase.co'
-const key = process.env.VITE_SUPABASE_ANON_KEY || 'sb_publishable_j1TVHyct-lpIsP500xPpww_g'
+const url = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL || 'https://fmirayitizchewkfhgxh.supabase.co'
+const key = process.env.SUPABASE_SECRET_KEY || process.env.VITE_SUPABASE_ANON_KEY || 'sb_publishable_j1TVHyct-lpIsP5OOxPpww_gmX_rRo0'
 const supabase = createClient(url, key)
 const recentRequests = new Map()
 
