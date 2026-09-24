@@ -5,6 +5,7 @@ import Header from '../components/Header'
 import Hero from '../components/Hero'
 import Categories from '../components/Categories'
 import BrandCompare from '../components/BrandCompare'
+import ProductComparison from '../components/ProductComparison'
 import HowItWorks from '../components/HowItWorks'
 import Recommendation from '../components/Recommendation'
 import CompareIntro from '../components/CompareIntro'
@@ -20,6 +21,7 @@ export default function LandingLayout({ slug }) {
   const apartment = useMemo(() => getApartmentBySlug(resolvedSlug), [resolvedSlug])
   const [searchParams] = useSearchParams()
   const [products, setProducts] = useState([])
+  const [selectedComparison, setSelectedComparison] = useState([])
 
   const utmSource = searchParams.get('utm_source') || ''
   const utmMedium = searchParams.get('utm_medium') || ''
@@ -65,6 +67,7 @@ export default function LandingLayout({ slug }) {
 
   const brandBg = apartment.brandColor || '#0b1c2e'
   const brandAccent = apartment.brandAccent || '#c7a14a'
+  const selectedInterest = selectedComparison.map((product) => `${product.brand} ${product.name}`).join(', ')
 
   return (
     <div className="min-h-screen bg-white" style={{ color: '#0b1c2e' }}>
@@ -72,6 +75,7 @@ export default function LandingLayout({ slug }) {
       <main>
         <Hero apartment={apartment} />
         <BrandCompare />
+        <ProductComparison products={products} onApply={setSelectedComparison} />
         <Categories />
         <HowItWorks />
         <Recommendation products={products} />
@@ -122,6 +126,7 @@ export default function LandingLayout({ slug }) {
                     apartment={apartment}
                     utm={{ utmSource, utmMedium, utmCampaign, utmContent }}
                     brandAccent={brandAccent}
+                    prefillInterest={selectedInterest}
                   />
                 </div>
               </div>

@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { openChannelTalk } from './ChannelTalk'
 
-export default function ConsultationForm({ apartment, utm, brandAccent = '#c7a14a' }) {
+export default function ConsultationForm({ apartment, utm, brandAccent = '#c7a14a', prefillInterest = '' }) {
   const [form, setForm] = useState({
     name: '',
     phone: '',
@@ -11,6 +11,10 @@ export default function ConsultationForm({ apartment, utm, brandAccent = '#c7a14
     privacyConsent: false,
   })
   const [status, setStatus] = useState('idle')
+
+  useEffect(() => {
+    if (prefillInterest) setForm((previous) => ({ ...previous, interest: prefillInterest }))
+  }, [prefillInterest])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
