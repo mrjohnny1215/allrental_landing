@@ -9,8 +9,29 @@ const FALLBACK_IMAGES = {
   안마의자: '/images/products/massager.jpg',
 }
 
+// 최신 수수료표.xlsx의 모델별 최고 수수료. 카탈로그 값과 다를 때만 엑셀 값을 우선한다.
+const COMMISSION_OVERRIDES = {
+  'WP-60C90520M': 356400, ACL22C: 268568, 'CHPI-7430N': 440370,
+  'CHPI-7420N': 465660, 'CHPI-7410N': 453060, 'CPI-7410N': 440370,
+  'CHPI-7400N': 453060, 'CHPI-7511L': 440370, 'CHPI-7521L': 440370,
+  'CPI-7400N': 440370, 'CPI-7511L': 427770, 'CPSI-8510L': 453060,
+  'CHP-7212N': 414990, 'CHP-7220N': 414990, 'CP-7220N': 402390,
+  'CHP-7211N': 402390, 'CP-7211N': 389790, WP270: 382500, HN877: 1147500,
+  'CP-AHS101HE': 570542, 'CP-AHS100HE': 545996, 'CP-SS100H': 465802,
+  'CP-AMS100': 535052, 'CP-ABS100GWH/GP': 463628, PM50SW: 360000,
+  'HQPM11CW1D/E0C': 351000, 'A-T12DW0B': 324000, 'A-B233W,Z': 279000,
+  'AS356N(S/G)MAM': 498681, 'AS206N(S/G)HAM': 380863, AS195DWWAM: 298390,
+  AS305DWWAM: 357300, AS235DWSAM: 357300, AS285DWWAM: 351409,
+  'HY705R(S/G)UAM': 451472, AS336NSLCM: 427990,
+}
+
 function monthlyFee(product) {
   return product.min_monthly_fee || product.pricing_matrix?.[0]?.monthly_fee || 0
+}
+
+function commission(product) {
+  const modelCode = String(product.model_code || '').trim().toUpperCase()
+  return COMMISSION_OVERRIDES[modelCode] || product.max_commission || 0
 }
 
 function productImage(product) {
@@ -28,7 +49,7 @@ export default function ProductComparison({ products = [], onApply }) {
       .filter((product) => product.category === category)
       .filter((product) => monthlyFee(product) > 0)
       .filter((product) => !keyword || `${product.brand} ${product.name} ${product.model_code || ''}`.toLowerCase().includes(keyword))
-      .sort((a, b) => monthlyFee(a) - monthlyFee(b))
+      .sort((a, b) => commission(b) - commission(a) || monthlyFee(a) - monthlyFee(b))
       .slice(0, 12)
   }, [products, category, query])
 
@@ -66,7 +87,7 @@ export default function ProductComparison({ products = [], onApply }) {
           <input value={query} onChange={(event) => setQuery(event.target.value)} className="min-w-0 flex-1 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm" placeholder={`${category} 모델명 또는 브랜드 검색`} />
         </div>
 
-        <p className="mt-4 text-xs font-semibold text-muted">모델을 최대 3개까지 선택하세요. ({selected.length}/3)</p>
+        <p className="mt-4 text-xs font-semibold text-muted">각 카테고리 상품은 수수료 높은 순으로 표시됩니다. 모델을 최대 3개까지 선택하세요. ({selected.length}/3)</p>
         <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {candidates.map((product) => {
             const isSelected = selected.some((item) => item.id === product.id)
