@@ -66,7 +66,7 @@ export default function ConsultationForm({ apartment, utm, brandAccent = '#c7a14
           <input
             value={form.name}
             onChange={(e) => setForm((prev) => ({ ...prev, name: e.target.value }))}
-            className="mt-1 w-full rounded-xl border border-gray-200 px-3 py-3 text-sm"
+            className="mt-1 w-full rounded-xl border border-gray-200 px-3 py-3 text-sm text-deep-navy placeholder:text-slate-400"
             placeholder="홍길동"
             required
           />
@@ -77,7 +77,7 @@ export default function ConsultationForm({ apartment, utm, brandAccent = '#c7a14
             type="tel"
             value={form.phone}
             onChange={(e) => setForm((prev) => ({ ...prev, phone: e.target.value }))}
-            className="mt-1 w-full rounded-xl border border-gray-200 px-3 py-3 text-sm"
+            className="mt-1 w-full rounded-xl border border-gray-200 px-3 py-3 text-sm text-deep-navy placeholder:text-slate-400"
             placeholder="010-0000-0000"
             inputMode="numeric"
             autoComplete="tel"
@@ -90,7 +90,7 @@ export default function ConsultationForm({ apartment, utm, brandAccent = '#c7a14
           <input
             value={form.interest}
             onChange={(e) => setForm((prev) => ({ ...prev, interest: e.target.value }))}
-            className="mt-1 w-full rounded-xl border border-gray-200 px-3 py-3 text-sm"
+            className="mt-1 w-full rounded-xl border border-gray-200 px-3 py-3 text-sm text-deep-navy placeholder:text-slate-400"
             placeholder="정수기, 비데"
           />
         </div>
@@ -99,7 +99,7 @@ export default function ConsultationForm({ apartment, utm, brandAccent = '#c7a14
           <input
             value={form.moveInDate}
             onChange={(e) => setForm((prev) => ({ ...prev, moveInDate: e.target.value }))}
-            className="mt-1 w-full rounded-xl border border-gray-200 px-3 py-3 text-sm"
+            className="mt-1 w-full rounded-xl border border-gray-200 px-3 py-3 text-sm text-deep-navy placeholder:text-slate-400"
             placeholder="2026-10"
           />
         </div>
@@ -108,7 +108,7 @@ export default function ConsultationForm({ apartment, utm, brandAccent = '#c7a14
           <textarea
             value={form.message}
             onChange={(e) => setForm((prev) => ({ ...prev, message: e.target.value }))}
-            className="mt-1 w-full rounded-xl border border-gray-200 px-3 py-3 text-sm"
+            className="mt-1 w-full rounded-xl border border-gray-200 px-3 py-3 text-sm text-deep-navy placeholder:text-slate-400"
             rows="3"
             placeholder="관심 있는 제품이나 문의사항을 적어주세요."
           />
