@@ -22,6 +22,7 @@ export default function LandingLayout({ slug }) {
   const [searchParams] = useSearchParams()
   const [products, setProducts] = useState([])
   const [selectedComparison, setSelectedComparison] = useState([])
+  const [bundleInterest, setBundleInterest] = useState('')
   const [comparisonCategory, setComparisonCategory] = useState('정수기')
 
   const utmSource = searchParams.get('utm_source') || ''
@@ -68,9 +69,15 @@ export default function LandingLayout({ slug }) {
 
   const brandBg = apartment.brandColor || '#0b1c2e'
   const brandAccent = apartment.brandAccent || '#c7a14a'
-  const selectedInterest = selectedComparison.map((product) => `${product.brand} ${product.name}`).join(', ')
+  const selectedInterest = bundleInterest || selectedComparison.map((product) => `${product.brand} ${product.name}`).join(', ')
   const openConsultation = (chosenProducts) => {
+    setBundleInterest('')
     setSelectedComparison(chosenProducts)
+    window.requestAnimationFrame(() => document.getElementById('consult')?.scrollIntoView({ behavior: 'smooth', block: 'start' }))
+  }
+  const openBundleConsultation = (interest) => {
+    setSelectedComparison([])
+    setBundleInterest(interest)
     window.requestAnimationFrame(() => document.getElementById('consult')?.scrollIntoView({ behavior: 'smooth', block: 'start' }))
   }
   const openCategoryRecommendation = (category) => {
@@ -89,7 +96,7 @@ export default function LandingLayout({ slug }) {
         <HowItWorks />
         <Recommendation products={products} onApply={openConsultation} />
         <CompareIntro />
-        <MultiProductConsultation />
+        <MultiProductConsultation onApply={openBundleConsultation} />
         <Trust apartment={apartment} />
         <Faq />
         <section
