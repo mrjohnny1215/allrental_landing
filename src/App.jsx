@@ -2,6 +2,7 @@ import React from 'react'
 import { Routes, Route, Navigate, Link } from 'react-router-dom'
 import LandingLayout from './pages/LandingLayout'
 import HillstateLanding from './pages/HillstateLanding'
+import WaterPurifierGuide from './pages/WaterPurifierGuide'
 import { getApartmentBySlug, APARTMENTS } from './config'
 
 function Dashboard() {
@@ -19,6 +20,19 @@ function Dashboard() {
         </div>
 
         <div className="mt-5 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+          <Link
+            to="/정수기-렌탈-가이드"
+            className="group flex items-center justify-between gap-4 border-b border-slate-200 bg-amber-50/70 px-4 py-4 transition hover:bg-amber-100/70 sm:px-5"
+          >
+            <div className="min-w-0">
+              <div className="flex items-center gap-2">
+                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-gold text-xs font-black text-white">i</span>
+                <h2 className="truncate text-base font-extrabold text-deep-navy">정수기 렌탈 선택 가이드</h2>
+              </div>
+              <p className="mt-1 text-xs text-muted">아파트 무관 · 처음 정수기를 고를 때 확인할 7가지 기준</p>
+            </div>
+            <span className="shrink-0 rounded-xl bg-gold px-3 py-2 text-xs font-bold text-white">읽기 →</span>
+          </Link>
           {list.map((apt) => (
             <Link
               key={apt.slug}
@@ -81,6 +95,7 @@ export default function App() {
       {/* 힐스테이트 메디알레 전용 랜딩 */}
       <Route path="/mediale" element={<HillstateLanding aptKey="mediale" />} />
       <Route path="/hillstate" element={<HillstateLanding aptKey="hillstate" />} />
+      <Route path="/정수기-렌탈-가이드" element={<WaterPurifierGuide />} />
 
       {/* 구글 시트/DB 기반 단지별 공통 랜딩 */}
       <Route path="/:slug" element={<LandingLayout />} />
