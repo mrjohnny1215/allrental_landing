@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 
 const PLUGIN_KEY = 'b7c4d7ed-5675-4260-9a28-817d26e9fce9'
 let hasBooted = false
@@ -22,7 +23,13 @@ export function openChannelTalk() {
 }
 
 export default function ChannelTalk() {
+  const { pathname } = useLocation()
+  const isPublicComparison = pathname === '/정수기-렌탈-가이드'
   useEffect(() => {
+    if (isPublicComparison) {
+      window.ChannelIO?.('hideChannelButton')
+      return undefined
+    }
     installChannelScript()
     if (!hasBooted) {
       window.ChannelIO('boot', { pluginKey: PLUGIN_KEY, language: 'ko' })
@@ -40,7 +47,9 @@ export default function ChannelTalk() {
     syncMobileButton()
     window.addEventListener('resize', syncMobileButton)
     return () => window.removeEventListener('resize', syncMobileButton)
-  }, [])
+  }, [isPublicComparison])
+
+  if (isPublicComparison) return null
 
   return (
     <button
