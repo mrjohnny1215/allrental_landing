@@ -25,7 +25,7 @@ export default function ChannelTalk() {
   useEffect(() => {
     installChannelScript()
     if (!hasBooted) {
-      window.ChannelIO('boot', { pluginKey: PLUGIN_KEY })
+      window.ChannelIO('boot', { pluginKey: PLUGIN_KEY, language: 'ko' })
       hasBooted = true
     }
 
