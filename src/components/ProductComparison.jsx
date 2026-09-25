@@ -9,6 +9,29 @@ const PRIORITIES = [
 const FALLBACK_IMAGES = {
   정수기: '/images/products/water.jpg', 비데: '/images/products/bidet.jpg', 공기청정기: '/images/products/purifier.jpg', 매트리스: '/images/products/mattress.jpg', 안마의자: '/images/products/massager.jpg',
 }
+const RECOMMENDED_THUMBNAILS = {
+  'skmagic-wpu-iac506s': '/images/recommended/skmagic-wpu-iac506s.jpg',
+  'cuckoo-cp-acsr1620sw': '/images/recommended/cuckoo-cp-acsr1620sw.jpg',
+  'cuckoo-cp-acs1610snw': '/images/recommended/cuckoo-cp-acs1610snw.jpg',
+  'chungho-wi-15c7500': '/images/recommended/chungho-wi-15c7500.jpg',
+  'coway-chp-700l': '/images/recommended/coway-chp-700l.jpg',
+  'coway-bas51-a': '/images/recommended/coway-bas51-a.jpg',
+  'coway-bas38-c': '/images/recommended/coway-bas38-c.jpg',
+  'coway-bas37-c': '/images/recommended/coway-bas37-c.jpg',
+  'wells-bm750': '/images/recommended/wells-bm750.jpg',
+  'skmagic-bids51dr15wh': '/images/recommended/skmagic-bids51dr15wh.jpg',
+  'hyundai-hqab20340f': '/images/recommended/hyundai-hqab20340f.jpg',
+  'lg-as356n-s-g-mam-2': '/images/recommended/lg-as356n-s-g-mam-2.jpg',
+  'lg-as356n-s-g-mam': '/images/recommended/lg-as356n-s-g-mam.jpg',
+  'lg-as336nslcm-2': '/images/recommended/lg-as336nslcm-2.jpg',
+  'coway-cmlk-as05': '/images/recommended/coway-cmlk-as05.jpg',
+  'coway-cmk-as05': '/images/recommended/coway-cmk-as05.jpg',
+  'coway-cmq-as05': '/images/recommended/coway-cmq-as05.jpg',
+  'wells-hn877-2': '/images/recommended/wells-hn877-2.jpg',
+  'wells-hn877': '/images/recommended/wells-hn877.jpg',
+  'wells-hr768rwa': '/images/recommended/wells-hr768rwa.jpg',
+  'coway-mc-sc01': '/images/recommended/coway-mc-sc01.jpg',
+}
 
 // 최신 수수료표.xlsx의 모델별 최고 수수료. 추천 순서를 안정적으로 정하는 내부 기준으로만 사용한다.
 const COMMISSION_OVERRIDES = {
@@ -17,7 +40,7 @@ const COMMISSION_OVERRIDES = {
 
 function monthlyFee(product) { return product.min_monthly_fee || product.pricing_matrix?.[0]?.monthly_fee || 0 }
 function commission(product) { return COMMISSION_OVERRIDES[String(product.model_code || '').trim().toUpperCase()] || product.max_commission || 0 }
-function productImage(product) { return product.thumbnail || product.images?.[0] || FALLBACK_IMAGES[product.category] }
+function productImage(product) { return RECOMMENDED_THUMBNAILS[product.id] || product.thumbnail || product.images?.[0] || FALLBACK_IMAGES[product.category] }
 function managementSummary(product) {
   const details = product.pricing_matrix?.[0] || {}
   return [details.mgmt, details.mgmt_cycle].filter(Boolean).join(' · ') || '관리 조건 상담 시 안내'
