@@ -28,7 +28,28 @@ export default function ChannelTalk() {
       window.ChannelIO('boot', { pluginKey: PLUGIN_KEY })
       hasBooted = true
     }
+
+    const syncMobileButton = () => {
+      if (window.innerWidth < 768) {
+        window.ChannelIO?.('hideChannelButton')
+      } else {
+        window.ChannelIO?.('showChannelButton')
+      }
+    }
+
+    syncMobileButton()
+    window.addEventListener('resize', syncMobileButton)
+    return () => window.removeEventListener('resize', syncMobileButton)
   }, [])
 
-  return null
+  return (
+    <button
+      type="button"
+      onClick={openChannelTalk}
+      className="fixed bottom-5 right-4 z-[9999] flex h-14 w-14 items-center justify-center rounded-full bg-[#8d99e8] text-2xl text-[#0b1c2e] shadow-lg shadow-black/25 transition hover:scale-105 active:scale-95 md:hidden"
+      aria-label="채팅 상담 열기"
+    >
+      <span aria-hidden="true">💬</span>
+    </button>
+  )
 }
