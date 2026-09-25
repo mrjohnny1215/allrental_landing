@@ -5,26 +5,27 @@ const key = process.env.SUPABASE_SECRET_KEY || process.env.VITE_SUPABASE_ANON_KE
 const supabase = createClient(url, key)
 const recentRequests = new Map()
 
-const REST_API_KEY = '469483cab1a10473bbd578f3e73a1be7'
-let ACCESS_TOKEN = process.env.KAKAO_ACCESS_TOKEN || 'nmDl6RX3VTuU4BgMjQQKKjlRGNZlU02PAAAAAQoXC9cAAAGgeszLkCEj9baI01p6'
-let REFRESH_TOKEN = process.env.KAKAO_REFRESH_TOKEN || 'TaL4sOzSS-sqpI1lXIcffOxMpRX4pDmlAAAAAgoXC9cAAAGgeszLiiEj9baI01p6'
+const KAKAO_REST_API_KEY = process.env.KAKAO_REST_API_KEY
+const KAKAO_REFRESH_TOKEN = process.env.KAKAO_REFRESH_TOKEN
+let accessToken = process.env.KAKAO_ACCESS_TOKEN || null
 
 // 토큰 자동 갱신 함수
 async function refreshKakaoToken() {
+  if (!KAKAO_REST_API_KEY || !KAKAO_REFRESH_TOKEN) return false
+
   try {
     const res = await fetch('https://kauth.kakao.com/oauth/token', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams({
         grant_type: 'refresh_token',
-        client_id: REST_API_KEY,
-        refresh_token: REFRESH_TOKEN
+        client_id: KAKAO_REST_API_KEY,
+        refresh_token: KAKAO_REFRESH_TOKEN
       }).toString()
     })
     const data = await res.json()
     if (data.access_token) {
-      ACCESS_TOKEN = data.access_token
-      if (data.refresh_token) REFRESH_TOKEN = data.refresh_token
+      accessToken = data.access_token
       return true
     }
   } catch (err) {
@@ -62,12 +63,14 @@ async function sendKakaoAlert(lead) {
   }
 
   try {
-    let res = await postMessage(ACCESS_TOKEN)
+    if (!accessToken && !(await refreshKakaoToken())) return
+
+    let res = await postMessage(accessToken)
     // 401(토큰 만료) 발생 시 자동 갱신 후 재전송
     if (res.status === 401) {
       const refreshed = await refreshKakaoToken()
       if (refreshed) {
-        await postMessage(ACCESS_TOKEN)
+        await postMessage(accessToken)
       }
     }
   } catch (err) {
