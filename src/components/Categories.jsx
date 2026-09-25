@@ -36,7 +36,7 @@ const CATEGORIES = [
   },
 ]
 
-export default function Categories() {
+export default function Categories({ onSelect }) {
   return (
     <section id="benefits" className="bg-white">
       <div className="mx-auto max-w-6xl px-5 py-16">
@@ -48,9 +48,11 @@ export default function Categories() {
         </p>
         <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-5">
           {CATEGORIES.map((item) => (
-            <div
+            <button
               key={item.id}
-              className="flex flex-col rounded-2xl border border-gray-100 bg-surface p-4 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+              type="button"
+              onClick={() => onSelect?.(item.label)}
+              className="flex flex-col rounded-2xl border border-gray-100 bg-surface p-4 text-left shadow-sm transition hover:-translate-y-1 hover:border-[#2f6ea9] hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2f6ea9]"
             >
               <div className="flex h-24 items-center justify-center overflow-hidden rounded-xl bg-white">
                 <img src={item.image} alt={item.label} className="h-full w-full object-contain" />
@@ -58,7 +60,7 @@ export default function Categories() {
               <div className="mt-3 text-base font-bold text-deep-navy">{item.label}</div>
               <div className="mt-1 text-xs font-semibold text-muted">{item.desc}</div>
               <div className="text-xs text-muted">{item.detail}</div>
-            </div>
+            </button>
           ))}
         </div>
       </div>

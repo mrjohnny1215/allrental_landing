@@ -22,6 +22,7 @@ export default function LandingLayout({ slug }) {
   const [searchParams] = useSearchParams()
   const [products, setProducts] = useState([])
   const [selectedComparison, setSelectedComparison] = useState([])
+  const [comparisonCategory, setComparisonCategory] = useState('정수기')
 
   const utmSource = searchParams.get('utm_source') || ''
   const utmMedium = searchParams.get('utm_medium') || ''
@@ -72,6 +73,10 @@ export default function LandingLayout({ slug }) {
     setSelectedComparison(chosenProducts)
     window.requestAnimationFrame(() => document.getElementById('consult')?.scrollIntoView({ behavior: 'smooth', block: 'start' }))
   }
+  const openCategoryRecommendation = (category) => {
+    setComparisonCategory(category)
+    window.requestAnimationFrame(() => document.getElementById('compare-products')?.scrollIntoView({ behavior: 'smooth', block: 'start' }))
+  }
 
   return (
     <div className="min-h-screen bg-white" style={{ color: '#0b1c2e' }}>
@@ -79,8 +84,8 @@ export default function LandingLayout({ slug }) {
       <main>
         <Hero apartment={apartment} />
         <BrandCompare />
-        <ProductComparison products={products} onApply={openConsultation} />
-        <Categories />
+        <ProductComparison products={products} onApply={openConsultation} category={comparisonCategory} onCategoryChange={setComparisonCategory} />
+        <Categories onSelect={openCategoryRecommendation} />
         <HowItWorks />
         <Recommendation products={products} onApply={openConsultation} />
         <CompareIntro />

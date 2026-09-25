@@ -29,8 +29,7 @@ function compareForPriority(priority) {
   return (a, b) => commission(b) - commission(a) || monthlyFee(a) - monthlyFee(b)
 }
 
-export default function ProductComparison({ products = [], onApply }) {
-  const [category, setCategory] = useState('정수기')
+export default function ProductComparison({ products = [], onApply, category = '정수기', onCategoryChange }) {
   const [priority, setPriority] = useState('balanced')
   const [query, setQuery] = useState('')
   const [showComparison, setShowComparison] = useState(false)
@@ -51,7 +50,7 @@ export default function ProductComparison({ products = [], onApply }) {
     <div className="max-w-2xl"><p className="text-xs font-extrabold tracking-[0.16em] text-[#2f6ea9]">EASY PRODUCT RECOMMENDATION</p><h2 className="mt-2 text-2xl font-black tracking-[-0.045em] text-deep-navy md:text-3xl">우리 집에 맞는 제품을 간단히 찾아보세요</h2><p className="mt-2 text-sm leading-relaxed text-muted">품목과 우선 조건만 고르면 비교하기 쉬운 추천 3가지를 바로 보여드립니다.</p></div>
     <div className="mt-8 rounded-3xl border border-slate-200 bg-white p-5 shadow-sm md:p-7">
       <p className="text-sm font-extrabold text-deep-navy"><span className="mr-2 inline-flex h-6 w-6 items-center justify-center rounded-full bg-deep-navy text-xs text-white">1</span>어떤 제품이 필요하세요?</p>
-      <div className="mt-4 flex flex-wrap gap-2">{CATEGORIES.map((item) => <button key={item} type="button" onClick={() => { setCategory(item); setQuery(''); setShowComparison(false) }} className={`rounded-full px-4 py-2.5 text-sm font-bold transition ${category === item ? 'bg-deep-navy text-white' : 'bg-slate-50 text-muted ring-1 ring-slate-200 hover:text-deep-navy'}`}>{item}</button>)}</div>
+      <div className="mt-4 flex flex-wrap gap-2">{CATEGORIES.map((item) => <button key={item} type="button" onClick={() => { onCategoryChange?.(item); setQuery(''); setShowComparison(false) }} className={`rounded-full px-4 py-2.5 text-sm font-bold transition ${category === item ? 'bg-deep-navy text-white' : 'bg-slate-50 text-muted ring-1 ring-slate-200 hover:text-deep-navy'}`}>{item}</button>)}</div>
       <p className="mt-7 text-sm font-extrabold text-deep-navy"><span className="mr-2 inline-flex h-6 w-6 items-center justify-center rounded-full bg-deep-navy text-xs text-white">2</span>무엇을 가장 중요하게 보세요?</p>
       <div className="mt-4 grid gap-3 md:grid-cols-3">{PRIORITIES.map((item) => <button key={item.id} type="button" onClick={() => { setPriority(item.id); setShowComparison(false) }} className={`rounded-2xl border p-4 text-left transition ${priority === item.id ? 'border-[#2f6ea9] bg-[#eaf2fb] ring-2 ring-[#2f6ea9]/15' : 'border-slate-200 hover:border-slate-300'}`}><span className="block text-sm font-extrabold text-deep-navy">{item.label}</span><span className="mt-1 block text-xs leading-relaxed text-muted">{item.description}</span></button>)}</div>
     </div>
