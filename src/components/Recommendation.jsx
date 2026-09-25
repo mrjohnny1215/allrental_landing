@@ -53,7 +53,7 @@ const IMAGE_MAP = {
   안마의자: '/images/products/massager.jpg',
 }
 
-export default function Recommendation({ products = [], preselected }) {
+export default function Recommendation({ products = [], preselected, onApply }) {
   const [form, setForm] = useState({
     family: '',
     children: '',
@@ -220,7 +220,7 @@ export default function Recommendation({ products = [], preselected }) {
                 <h3 className="text-lg font-bold text-deep-navy">맞춤 추천 TOP 3 제품</h3>
                 <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
                   {recommended.map((item, idx) => (
-                    <ProductCard key={item.id} rank={idx + 1} product={item} />
+                    <ProductCard key={item.id} rank={idx + 1} product={item} onApply={onApply} />
                   ))}
                 </div>
               </div>
@@ -232,7 +232,7 @@ export default function Recommendation({ products = [], preselected }) {
   )
 }
 
-function ProductCard({ rank, product }) {
+function ProductCard({ rank, product, onApply }) {
   const monthly = product.pricing_matrix?.[0]?.monthly_fee || product.min_monthly_fee || '문의'
   const points = product.selling_points?.points?.slice(0, 4) || []
   const label = typeof monthly === 'number' ? `월 ${monthly.toLocaleString()}원` : monthly
@@ -266,12 +266,13 @@ function ProductCard({ rank, product }) {
           <li key={i}>• {pt}</li>
         ))}
       </ul>
-      <a
-        href="#consult"
+      <button
+        type="button"
+        onClick={() => onApply?.([product])}
         className="mt-3 inline-flex w-full items-center justify-center rounded-xl border border-deep-navy px-4 py-3 text-sm font-semibold text-deep-navy"
       >
         이 제품으로 견적 신청
-      </a>
+      </button>
     </div>
   )
 }

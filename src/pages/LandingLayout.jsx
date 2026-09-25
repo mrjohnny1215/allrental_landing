@@ -68,6 +68,10 @@ export default function LandingLayout({ slug }) {
   const brandBg = apartment.brandColor || '#0b1c2e'
   const brandAccent = apartment.brandAccent || '#c7a14a'
   const selectedInterest = selectedComparison.map((product) => `${product.brand} ${product.name}`).join(', ')
+  const openConsultation = (chosenProducts) => {
+    setSelectedComparison(chosenProducts)
+    window.requestAnimationFrame(() => document.getElementById('consult')?.scrollIntoView({ behavior: 'smooth', block: 'start' }))
+  }
 
   return (
     <div className="min-h-screen bg-white" style={{ color: '#0b1c2e' }}>
@@ -75,10 +79,10 @@ export default function LandingLayout({ slug }) {
       <main>
         <Hero apartment={apartment} />
         <BrandCompare />
-        <ProductComparison products={products} onApply={setSelectedComparison} />
+        <ProductComparison products={products} onApply={openConsultation} />
         <Categories />
         <HowItWorks />
-        <Recommendation products={products} />
+        <Recommendation products={products} onApply={openConsultation} />
         <CompareIntro />
         <MultiProductConsultation />
         <Trust apartment={apartment} />
