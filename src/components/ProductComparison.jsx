@@ -2,8 +2,8 @@ import { useMemo, useState } from 'react'
 
 const CATEGORIES = ['정수기', '비데', '공기청정기', '매트리스', '안마의자']
 const PRIORITIES = [
-  { id: 'balanced', label: '균형 있게 추천', description: '가격과 관리 조건을 두루 보고 싶어요' },
-  { id: 'value', label: '월 렌탈료 우선', description: '매달 내는 비용을 줄이고 싶어요' },
+  { id: 'balanced', label: '추천 모델 우선', description: '조건이 좋은 상위 모델부터 보고 싶어요' },
+  { id: 'premium', label: '프리미엄 제품 우선', description: '기능이 좋은 상위 제품을 보고 싶어요' },
   { id: 'care', label: '관리 편의 우선', description: '관리 서비스를 중요하게 보고 싶어요' },
 ]
 const FALLBACK_IMAGES = {
@@ -24,7 +24,7 @@ function managementSummary(product) {
 }
 function careScore(product) { return /방문|관리|케어|필터/.test(`${managementSummary(product)} ${product.tags?.join(' ') || ''}`) ? 1 : 0 }
 function compareForPriority(priority) {
-  if (priority === 'value') return (a, b) => monthlyFee(a) - monthlyFee(b) || commission(b) - commission(a)
+  if (priority === 'premium') return (a, b) => monthlyFee(b) - monthlyFee(a) || commission(b) - commission(a)
   if (priority === 'care') return (a, b) => careScore(b) - careScore(a) || commission(b) - commission(a) || monthlyFee(a) - monthlyFee(b)
   return (a, b) => commission(b) - commission(a) || monthlyFee(a) - monthlyFee(b)
 }
